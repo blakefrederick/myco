@@ -7,6 +7,11 @@ function ChatInput() {
 
     const addMessage = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+
+        if (!input) return
+
+        const messageToSend = input
+        setInput('')
     }
 
   return (
