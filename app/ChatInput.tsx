@@ -38,8 +38,10 @@ function ChatInput() {
             })
 
             const data = await res.json()
+            console.log("Message added! ", data)
         }
 
+        uploadMessageToUpstash()
     }
 
   return (
