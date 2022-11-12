@@ -1,8 +1,14 @@
 import React from 'react'
+import MessageList from './MessageList'
+import ChatInput from './ChatInput'
 
 function HomePage() {
     return (
-        <h1 className="text-center">🎔</h1>
+        <main>
+            <MessageList />
+            <ChatInput/>
+            <h1 className="text-center">🎔</h1>
+        </main>
     )
 }
 
