@@ -1,6 +1,8 @@
 'use client'
 
 import { FormEvent, useState} from 'react'
+import { v4 as uuid } from 'uuid'
+import { Message } from '../typings'
 
 function ChatInput() {
     const [input, setInput] = useState('')
@@ -12,6 +14,18 @@ function ChatInput() {
 
         const messageToSend = input
         setInput('')
+
+        const id = uuid()
+
+        const message: Message = {
+            id,
+            message: messageToSend,
+            created_at: Date.now(),
+            username: 'Blake Frederick',
+            profilePic: 'https://yt3.ggpht.com/WHJZWMGMtYtfNCT6CBnleexvlO2oR-LfkofliI5P3FBx73x8LTr_KAqVZvKhbg2EaP97qLIzEJk=s88-c-k-c0x00ffffff-no-rj-mo',
+            email: 'email@blake.ca'
+
+        }
     }
 
   return (
