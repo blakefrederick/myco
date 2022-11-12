@@ -16,10 +16,11 @@ function ChatInput() {
 
   return (
     <form
-        onSubmit={e => addMessage} 
+        onSubmit={addMessage} 
         className="fixed bottom-0 z-50 w-full flex px-10 py-5 space-x-2 border-t border-gray-100">
         <input 
             type="input" 
+            value={input}
             placeholder="What's happening?" 
             onChange={(e) => setInput(e.target.value)}
             className="flex-1 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent px-5 py-3 disabled:opacity-50 diabled:cursor-not-allowed"></input>
