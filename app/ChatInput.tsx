@@ -23,9 +23,23 @@ function ChatInput() {
             created_at: Date.now(),
             username: 'Blake Frederick',
             profilePic: 'https://yt3.ggpht.com/WHJZWMGMtYtfNCT6CBnleexvlO2oR-LfkofliI5P3FBx73x8LTr_KAqVZvKhbg2EaP97qLIzEJk=s88-c-k-c0x00ffffff-no-rj-mo',
-            email: 'email@blake.ca'
-
+            email: 'email@blake.ca',
         }
+
+        const uploadMessageToUpstash = async () => {
+            const res = await fetch('/api/addMessage', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    message
+                }),
+            })
+
+            const data = await res.json()
+        }
+
     }
 
   return (
