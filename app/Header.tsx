@@ -3,8 +3,22 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 function Header() {
+  const session = true // debug
+  
+  if (session) return (
+    <header className="sticky top-0 z-50 bg-white justify-center items-center p-10 shadow-sm">
+      <div className="flex space-x-2">
+        <Image className="rounded-full mx-2 object-contain" src="https://yt3.ggpht.com/WHJZWMGMtYtfNCT6CBnleexvlO2oR-LfkofliI5P3FBx73x8LTr_KAqVZvKhbg2EaP97qLIzEJk=s88-c-k-c0x00ffffff-no-rj-mo" alt='logo' height='50' width='50' />
+        <div>
+          <p>Logged in as:</p>
+          <p>Blake Frederick</p>
+        </div>
+      </div>
+    </header>
+  )
+
   return (
-    <header>
+    <header className="sticky top-0 z-50 bg-white justify-center items-center p-10 shadow-sm">
         <div className="flex flex-col items-center space-y-5">
             <div className="flex space-x-2 items center">
                 <Image src="https://yt3.ggpht.com/WHJZWMGMtYtfNCT6CBnleexvlO2oR-LfkofliI5P3FBx73x8LTr_KAqVZvKhbg2EaP97qLIzEJk=s88-c-k-c0x00ffffff-no-rj-mo" alt='logo' height='36' width='36' />
