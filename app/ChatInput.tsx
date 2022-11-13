@@ -8,11 +8,15 @@ import fetcher from '../utils/fetchMessages'
 
 function ChatInput() {
   const [input, setInput] = useState('')
-  const { data, error, mutate } = useSWR('/api/getMessages', fetcher)
+  const { data: messages, error, mutate } = useSWR('/api/getMessages', fetcher)
+  // Optimistic fetch data pattern:
+  // 1. Update immediately in the client, assuming the fetch request will succeed
+  // 2. If the value returned from fetch matches our optimistic guess, then great
+  // 3. Otherwise, rollback
 
-  console.log("wow it's the entire chat history:", data)
+  console.table(messages)
 
-  const addMessage = (e: FormEvent<HTMLFormElement>) => {
+  const addMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (!input) return
@@ -33,7 +37,7 @@ function ChatInput() {
     }
 
     const uploadMessageToUpstash = async () => {
-      const res = await fetch('/api/addMessage', {
+      const data = await fetch('/api/addMessage', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -41,13 +45,15 @@ function ChatInput() {
         body: JSON.stringify({
           message,
         }),
-      })
+      }).then((res) => res.json())
 
-      const data = await res.json()
-      console.log('Message added! ', data)
+      return [data.message, ...messages!]
     }
 
-    uploadMessageToUpstash()
+    await mutate(uploadMessageToUpstash, {
+      optimisticData: [message, ...messages!],
+      rollbackOnError: true,
+    })
   }
 
   return (
