@@ -4,6 +4,7 @@ import React from 'react'
 import { Message } from '../typings'
 import useSWR from 'swr'
 import fetcher from '../utils/fetchMessages'
+import MessageComponent from './MessageComponent'
 
 function MessageList() {
   const {
@@ -15,9 +16,7 @@ function MessageList() {
   return (
     <div className="p-5">
       {messages?.map((message) => (
-        <div key={message.id}>
-          <p className="m-3">{message.message}</p>
-        </div>
+        <MessageComponent key={message.id} message={message} />
       ))}
     </div>
   )
