@@ -14,8 +14,6 @@ function ChatInput() {
   // 2. If the value returned from fetch matches our optimistic guess, then great
   // 3. Otherwise, rollback
 
-  console.table(messages)
-
   const addMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
