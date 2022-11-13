@@ -8,29 +8,28 @@ type Data = {
 }
 
 type ErrorData = {
-    body: string
+  body: string
 }
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data | ErrorData>
 ) {
+  if (req.method !== 'POST') {
+    res.status(405).json({ body: 'Method Not Allowed' })
+    return
+  }
 
-    if (req.method !== 'POST') {
-        res.status(405).json({ body: 'Method Not Allowed' })
-        return
-    }
+  const { message } = req.body
 
-    const { message } = req.body
+  const newMessage = {
+    ...message,
+    // Use server time
+    created_at: Date.now(),
+  }
 
-    const newMessage = {
-        ...message,
-        // Use server time 
-        created_at: Date.now()
-    }
-
-    // To redis key value store
-    await redis.hset('messages', message.id, JSON.stringify(newMessage))
+  // To redis key value store
+  await redis.hset('messages', message.id, JSON.stringify(newMessage))
 
   res.status(200).json({ message: newMessage })
 }
