@@ -8,8 +8,8 @@ type Props = {
 
 function MessageComponent({ message }: Props) {
   return (
-    <div key={message.id}>
-      <div>
+    <div className="flex w-fit m-2">
+      <div className="flex-shrink-0">
         <Image
           className="rounded-full mx-2"
           height={50}
@@ -19,13 +19,17 @@ function MessageComponent({ message }: Props) {
         />
       </div>
       <div>
-        <p className="m-3">{message.username}</p>
-        <div>
-          <div>
+        <p className="text-2xs px-[2px] pb-[2px] text-gray-400">
+          {message.username}
+        </p>
+        <div className="flex items-end">
+          <div className="px-3 py-2 rounded-lg w-fit text-white bg-red-400">
             <p>{message.message}</p>
           </div>
-          <p>{new Date(message.created_at).toLocaleDateString()}</p>
         </div>
+        <p className="text-2xs italic px-2 text-gray-300">
+          {new Date(message.created_at).toLocaleString()}
+        </p>
       </div>
     </div>
   )
