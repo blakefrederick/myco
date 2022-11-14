@@ -2,6 +2,8 @@ import React from 'react'
 import MessageList from './MessageList'
 import ChatInput from './ChatInput'
 import { Message } from '../typings'
+import { unstable_getServerSession } from 'next-auth/next'
+import { Providers } from './providers'
 
 async function HomePage() {
   const data = await fetch(`${process.env.VERCEL_URL}/api/getMessages`).then(
@@ -9,14 +11,17 @@ async function HomePage() {
   )
 
   const messages: Message[] = data.messages
+  const session = await unstable_getServerSession()
+  console.log('session', session)
 
-  console.log(data)
   return (
-    <main>
-      <MessageList initialMessages={messages} />
-      <ChatInput />
-      <h1 className="text-center">🎔</h1>
-    </main>
+    <Providers session={session}>
+      <main>
+        <MessageList initialMessages={messages} />
+        <ChatInput session={session} />
+        <h1 className="text-center">🎔</h1>
+      </main>
+    </Providers>
   )
 }
 

@@ -5,14 +5,21 @@ import { v4 as uuid } from 'uuid'
 import { Message } from '../typings'
 import useSWR from 'swr'
 import fetcher from '../utils/fetchMessages'
+import { unstable_getServerSession } from 'next-auth'
 
-function ChatInput() {
+type Props = {
+  session: Awaited<ReturnType<typeof unstable_getServerSession>>
+}
+
+function ChatInput({ session }: Props) {
   const [input, setInput] = useState('')
   const { data: messages, error, mutate } = useSWR('/api/getMessages', fetcher)
   // Optimistic fetch data pattern:
   // 1. Update immediately in the client, assuming the fetch request will succeed
   // 2. If the value returned from fetch matches our optimistic guess, then great
   // 3. Otherwise, rollback
+
+  console.log('session', session)
 
   const addMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -62,6 +69,7 @@ function ChatInput() {
       <input
         type="input"
         value={input}
+        disabled={!session}
         placeholder="What's happening?"
         onChange={(e) => setInput(e.target.value)}
         className="flex-1 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent px-5 py-3 disabled:opacity-50 diabled:cursor-not-allowed"
