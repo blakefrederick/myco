@@ -5,6 +5,11 @@ module.exports = {
     appDir: true,
   },
   images: {
-    domains: ['yt3.ggpht.com', 'i.pinimg.com', 'i.shgcdn.com'],
+    domains: [
+      'yt3.ggpht.com',
+      'i.pinimg.com',
+      'i.shgcdn.com',
+      'platform-lookaside.fbsbx.com',
+    ],
   },
 }

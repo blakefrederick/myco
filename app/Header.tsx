@@ -13,14 +13,14 @@ async function Header() {
         <div className="flex space-x-2">
           <Image
             className="rounded-full mx-2 object-contain"
-            src="https://yt3.ggpht.com/WHJZWMGMtYtfNCT6CBnleexvlO2oR-LfkofliI5P3FBx73x8LTr_KAqVZvKhbg2EaP97qLIzEJk=s88-c-k-c0x00ffffff-no-rj-mo"
+            src={session.user?.image!}
             alt="Profile Picture"
             height="55"
             width="55"
           />
           <div>
             <p className="text-blue-400">Logged in as:</p>
-            <p className="font-bold text-lg">Blake Frederick</p>
+            <p className="font-bold text-lg">{session.user?.name}</p>
           </div>
         </div>
         <LogoutButton />

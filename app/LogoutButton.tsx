@@ -10,7 +10,7 @@ function LogoutButton() {
     if (buttonText !== 'No') {
       setButtonText('No')
     } else {
-      setButtonText('Okay! Signed Out!')
+      setButtonText('Okay! Signing Out')
       signOut()
     }
   }
