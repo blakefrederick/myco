@@ -17,7 +17,7 @@ async function HomePage() {
   return (
     <Providers session={session}>
       <main>
-        <MessageList initialMessages={messages} />
+        {session && <MessageList initialMessages={messages} />}
         <ChatInput session={session} />
         <h1 className="text-center">🎔</h1>
       </main>

@@ -2,9 +2,10 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import LogoutButton from './LogoutButton'
+import { unstable_getServerSession } from 'next-auth'
 
-function Header() {
-  const session = true // debug
+async function Header() {
+  const session = await unstable_getServerSession()
 
   if (session)
     return (
@@ -31,16 +32,16 @@ function Header() {
       <div className="flex flex-col items-center space-y-5">
         <div className="flex space-x-2 items center">
           <Image
-            src="https://yt3.ggpht.com/WHJZWMGMtYtfNCT6CBnleexvlO2oR-LfkofliI5P3FBx73x8LTr_KAqVZvKhbg2EaP97qLIzEJk=s88-c-k-c0x00ffffff-no-rj-mo"
+            src="https://i.shgcdn.com/4a3ef1db-194d-4444-b1cf-ecc4e980a86c/-/format/auto/-/preview/3000x3000/-/quality/lighter/"
             alt="logo"
-            height="36"
-            width="36"
+            height="600"
+            width="600"
           />
-          <p className="text-blue-400">Look it's Myco</p>
         </div>
+        <p className="text-gray-600">It's Myco</p>
         <Link
           href="/auth/signin"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           Sign In
         </Link>
