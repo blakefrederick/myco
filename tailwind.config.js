@@ -10,7 +10,12 @@ module.exports = {
       '3xs': '0.4rem',
       '2xs': '0.6rem',
     },
-    extend: {},
+    extend: {
+      colors: {
+        Facebook: '#4267B2',
+        GitHub: '#171515',
+      },
+    },
   },
   plugins: [],
 }

@@ -8,14 +8,14 @@ type Props = {
 
 function SignInComponent({ providers }: Props) {
   return (
-    <div className="flex justify-center">
+    <div className="justify-center">
       {Object.values(providers!).map((provider) => (
-        <div key={provider.name}>
+        <div key={provider.name} className={`'${provider.name}'`}>
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-blue-500 text-white font-bold my-4 py-2 px-4 rounded"
             onClick={() =>
               signIn(provider.id, {
-                callbackUrl: process.env.VERCEL_URL || 'http://localhost:3003',
+                callbackUrl: process.env.VERCEL_URL || 'http://localhost:3000',
               })
             }
           >

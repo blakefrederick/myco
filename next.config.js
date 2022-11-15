@@ -10,6 +10,7 @@ module.exports = {
       'i.pinimg.com',
       'i.shgcdn.com',
       'platform-lookaside.fbsbx.com',
+      'avatars.githubusercontent.com',
     ],
   },
 }
