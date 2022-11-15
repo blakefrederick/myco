@@ -1,6 +1,7 @@
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { Message } from '../typings'
+import DeleteButton from './DeleteButton'
 
 type Props = {
   key: string
@@ -46,6 +47,7 @@ function MessageComponent({ message }: Props) {
         >
           {new Date(message.created_at).toLocaleString()}
         </p>
+        {isUser && <DeleteButton session={session} />}
       </div>
     </div>
   )
