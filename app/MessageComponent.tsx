@@ -11,6 +11,8 @@ type Props = {
 function MessageComponent({ message }: Props) {
   const { data: session } = useSession()
   const isUser = session?.user?.email === message.email
+  const isGithub = session?.user?.image?.includes('github')
+  const isFacebook = session?.user?.image?.includes('fbsbx')
 
   return (
     <div className={`flex w-fit ${isUser && 'ml-auto'}`}>
@@ -25,17 +27,17 @@ function MessageComponent({ message }: Props) {
       </div>
       <div>
         <p
-          className={`text-2xs px-[2px] pb-[2px] ${
-            isUser ? 'text-blue-400 text-right' : 'text-green-400 text-left'
-          }`}
+          className={`text-2xs px-[2px] pb-[2px] text-right ${
+            isFacebook && 'text-blue-400'
+          } ${isGithub && 'text-gray-400'}`}
         >
           {message.username}
         </p>
         <div className="flex items-end">
           <div
-            className={`px-3 py-2 rounded-lg w-fit text-white ${
-              isUser ? 'bg-blue-400 ml-auto order-2' : 'bg-green-400'
-            }`}
+            className={`px-3 py-2 rounded-lg w-fit text-white ml-auto order-2 ${
+              isFacebook && 'bg-blue-400'
+            } ${isGithub && 'bg-gray-400'}`}
           >
             <p>{message.message}</p>
           </div>
@@ -46,6 +48,14 @@ function MessageComponent({ message }: Props) {
           }`}
         >
           {new Date(message.created_at).toLocaleString()}
+        </p>
+        <p
+          className={`text-2xs px-[1px] pb-[1px] text-right ${
+            isFacebook && 'text-blue-300'
+          } ${isGithub && 'text-gray-300'}`}
+        >
+          {isFacebook && 'Signed in with Facebook'}
+          {isGithub && 'Signed in with Github'}
         </p>
         {isUser && <DeleteButton session={session} />}
       </div>

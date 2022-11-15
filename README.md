@@ -2,13 +2,13 @@
 
 ## Messaging, chat
 
-Next.js 13 + Tailwind CSS + Upstash + Redis + Pusher + NextAuth + Facebook Login
+Next.js 13 + Tailwind CSS + Upstash + Redis + Pusher + NextAuth + Facebook and Github Authentication
 
 Yet another project to practice new things and reinforce existing things. Props to Sonny Sangha https://www.youtube.com/watch?v=T2jKJF4BZOY
 
-Log in with Facebook.. blue messages
-Log in with Github.. grey messages
-Not logged in.. grey messages
+Log in with Facebook.. blue messages\
+Log in with Github.. grey messages\
+Not logged in.. green messages\
 
 Messages are ephemeral. After 100 seconds of chat inactivity, the entire chat history is wiped from storage.
 
