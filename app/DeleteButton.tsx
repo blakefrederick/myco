@@ -1,7 +1,6 @@
 'use client'
 
 import { FormEvent, useState } from 'react'
-import { v4 as uuid } from 'uuid'
 import { Message } from '../typings'
 import useSWR from 'swr'
 import fetcher from '../utils/fetchMessages'
@@ -9,9 +8,10 @@ import { unstable_getServerSession } from 'next-auth'
 
 type Props = {
   session: Awaited<ReturnType<typeof unstable_getServerSession>>
+  message: Message
 }
 
-function DeleteButton({ session }: Props) {
+function DeleteButton({ session, message }: Props) {
   const [input, setInput] = useState('')
   const { data: messages, error, mutate } = useSWR('/api/getMessages', fetcher)
   // Optimistic fetch data pattern:
@@ -19,29 +19,13 @@ function DeleteButton({ session }: Props) {
   // 2. If the value returned from fetch matches our optimistic guess, then great
   // 3. Otherwise, rollback
 
-  console.log('session', session)
-
   const deleteMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (!input || !session) return
+    if (!session) return
 
-    const messageToSend = input
-    setInput('')
-
-    const id = uuid()
-
-    const message: Message = {
-      id,
-      message: messageToSend,
-      created_at: Date.now(),
-      username: session?.user?.name!,
-      profilePic: session?.user?.image!,
-      email: session?.user?.email!,
-    }
-
-    const uploadMessageToUpstash = async () => {
-      const data = await fetch('/api/deleteMessage', {
+    const deleteMessageFromUpstash = async () => {
+      const wasDeleted = await fetch('/api/deleteMessage', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -51,19 +35,22 @@ function DeleteButton({ session }: Props) {
         }),
       }).then((res) => res.json())
 
-      return [data.message, ...messages!]
+      return wasDeleted
     }
 
-    await mutate(uploadMessageToUpstash, {
-      optimisticData: [message, ...messages!],
-      rollbackOnError: true,
-    })
+    const deleteUpstashResult = await deleteMessageFromUpstash()
+    console.log('deleteUpstashResult', deleteUpstashResult)
+
+    // await mutate(deleteMessageFromUpstash, {
+    //   optimisticData: [message, ...messages!],
+    //   rollbackOnError: true,
+    // })
   }
   return (
     <>
       <form
         onSubmit={deleteMessage}
-        className="z-50 w-full flex space-x-2 justify-end border-t bg-white border-gray-100"
+        className="z-50 w-full flex space-x-2 justify-end bg-white "
       >
         <button
           type="submit"

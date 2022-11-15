@@ -19,8 +19,6 @@ function ChatInput({ session }: Props) {
   // 2. If the value returned from fetch matches our optimistic guess, then great
   // 3. Otherwise, rollback
 
-  console.log('session', session)
-
   const addMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
