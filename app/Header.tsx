@@ -6,6 +6,8 @@ import { unstable_getServerSession } from 'next-auth'
 
 async function Header() {
   const session = await unstable_getServerSession()
+  const isGithub = session?.user?.image?.includes('github')
+  const isFacebook = session?.user?.image?.includes('fbsbx')
 
   if (session)
     return (
@@ -21,6 +23,14 @@ async function Header() {
           <div>
             <p className="text-blue-400">Logged in as:</p>
             <p className="font-bold text-lg">{session.user?.name}</p>
+            <p
+              className={`text-2xs px-[1px] pb-[1px] ${
+                isFacebook && 'text-blue-300'
+              } ${isGithub && 'text-gray-300'}`}
+            >
+              {isFacebook && 'Signed in with Facebook'}
+              {isGithub && 'Signed in with Github'}
+            </p>
           </div>
         </div>
         <LogoutButton />

@@ -11,12 +11,12 @@ type Props = {
 function MessageComponent({ message }: Props) {
   const { data: session } = useSession()
   const isUser = session?.user?.email === message.email
-  const isGithub = session?.user?.image?.includes('github')
-  const isFacebook = session?.user?.image?.includes('fbsbx')
+  const isGithub = message.service === 'Github'
+  const isFacebook = message.service === 'Facebook'
 
   return (
-    <div className={`flex w-fit ${isUser && 'ml-auto'}`}>
-      <div className={`flex-shrink-0 ${isUser && 'order-2'}`}>
+    <div className={`flex w-fit ${isFacebook && 'ml-auto'}`}>
+      <div className={`flex-shrink-0 ${isFacebook && 'order-2'}`}>
         <Image
           className="rounded-full mx-2"
           height={50}
@@ -27,37 +27,42 @@ function MessageComponent({ message }: Props) {
       </div>
       <div>
         <p
-          className={`text-2xs px-[2px] pb-[2px] text-right ${
-            isFacebook && 'text-blue-400'
+          className={`text-2xs px-[2px] pb-[2px] ${
+            isFacebook && 'text-blue-400 text-right'
           } ${isGithub && 'text-gray-400'}`}
         >
           {message.username}
         </p>
         <div className="flex items-end">
           <div
-            className={`px-3 py-2 rounded-lg w-fit text-white ml-auto order-2 ${
-              isFacebook && 'bg-blue-400'
+            className={`px-3 py-2 rounded-lg w-fit text-white ${
+              isFacebook && 'bg-blue-400 ml-auto order-2'
             } ${isGithub && 'bg-gray-400'}`}
           >
             <p>{message.message}</p>
           </div>
         </div>
         <p
-          className={`text-2xs italic px-2 text-gray-300 ${
-            isUser && 'text-right'
+          className={`text-2xs italic text-gray-300 ${
+            isFacebook && 'text-right'
           }`}
         >
           {new Date(message.created_at).toLocaleString()}
         </p>
         <p
-          className={`text-2xs px-[1px] pb-[1px] text-right ${
-            isFacebook && 'text-blue-300'
+          className={`text-2xs px-[1px] pb-[1px]  ${
+            isFacebook && 'text-blue-300 text-right'
           } ${isGithub && 'text-gray-300'}`}
         >
-          {isFacebook && 'Signed in with Facebook'}
-          {isGithub && 'Signed in with Github'}
+          Message sent via {message.service}
         </p>
-        {isUser && <DeleteButton session={session} />}
+        <p
+          className={`text-2xs px-[1px] pb-[1px]  ${
+            isFacebook && 'text-blue-300 text-right'
+          } ${isGithub && 'text-gray-300'}`}
+        >
+          {isUser && <DeleteButton session={session} message={message} />}
+        </p>
       </div>
     </div>
   )

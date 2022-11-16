@@ -14,6 +14,7 @@ type Props = {
 function DeleteButton({ session, message }: Props) {
   const [input, setInput] = useState('')
   const { data: messages, error, mutate } = useSWR('/api/getMessages', fetcher)
+  const isFacebook = message?.service === 'Facebook'
   // Optimistic fetch data pattern:
   // 1. Update immediately in the client, assuming the fetch request will succeed
   // 2. If the value returned from fetch matches our optimistic guess, then great
@@ -50,11 +51,13 @@ function DeleteButton({ session, message }: Props) {
     <>
       <form
         onSubmit={deleteMessage}
-        className="z-50 w-full flex space-x-2 justify-end bg-white "
+        className={`z-50 bg-white ${!isFacebook && 'w-full flex space-x-2'}`}
       >
         <button
           type="submit"
-          className={`text-2xs italic px-2 text-gray-300 text-right`}
+          className={`text-2xs italic text-gray-300 ${
+            isFacebook && 'text-right'
+          }`}
         >
           Delete
         </button>
