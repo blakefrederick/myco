@@ -11,6 +11,7 @@ module.exports = {
       'i.shgcdn.com',
       'platform-lookaside.fbsbx.com',
       'avatars.githubusercontent.com',
+      'pbs.twimg.com',
     ],
   },
 }

@@ -8,6 +8,7 @@ async function Header() {
   const session = await unstable_getServerSession()
   const isGithub = session?.user?.image?.includes('github')
   const isFacebook = session?.user?.image?.includes('fbsbx')
+  const isTwitter = session?.user?.image?.includes('twimg')
 
   if (session)
     return (

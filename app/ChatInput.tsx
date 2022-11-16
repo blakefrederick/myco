@@ -16,7 +16,14 @@ function ChatInput({ session }: Props) {
   const { data: messages, error, mutate } = useSWR('/api/getMessages', fetcher)
   const isGithub = session?.user?.image?.includes('github')
   const isFacebook = session?.user?.image?.includes('fbsbx')
-  const service = isFacebook ? 'Facebook' : isGithub ? 'Github' : ''
+  const isTwitter = session?.user?.image?.includes('twimg')
+  const service = isFacebook
+    ? 'Facebook'
+    : isGithub
+    ? 'Github'
+    : isTwitter
+    ? 'Twitter'
+    : ''
   // Optimistic fetch data pattern:
   // 1. Update immediately in the client, assuming the fetch request will succeed
   // 2. If the value returned from fetch matches our optimistic guess, then great

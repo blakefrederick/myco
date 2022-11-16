@@ -13,6 +13,7 @@ function MessageComponent({ message }: Props) {
   const isUser = session?.user?.email === message.email
   const isGithub = message.service === 'Github'
   const isFacebook = message.service === 'Facebook'
+  const isTwitter = session?.user?.image?.includes('twimg')
 
   return (
     <div className={`flex w-fit ${isFacebook && 'ml-auto'}`}>
