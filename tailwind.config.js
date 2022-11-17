@@ -14,6 +14,7 @@ module.exports = {
       colors: {
         Facebook: '#4267B2',
         GitHub: '#171515',
+        Twitter: '#1DA1F2',
       },
     },
   },
