@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { Message } from 'typings'
 import useSWR from 'swr'
 import fetcher from 'utils/fetchMessages'
