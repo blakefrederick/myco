@@ -10,14 +10,14 @@ async function HomePage() {
     (res) => res.json()
   )
 
-  const messages: Message[] = data.messages
+  const messages: Message[] = data.messages // this and fetch unused because it's not passed to MessageList
   const session = await unstable_getServerSession()
   console.log('session', session)
 
   return (
     <Providers session={session}>
       <main>
-        {session && <MessageList initialMessages={messages} />}
+        {session && <MessageList />}
         {session && <ChatInput session={session} />}
         <h1 className="text-center">🎔</h1>
       </main>
