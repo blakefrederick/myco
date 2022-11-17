@@ -27,9 +27,12 @@ function MessageList() {
               notification = new Notification(
                 'Come back to your conversation!',
                 {
-                  body: `All messages will disappear in ${
-                    100 - Math.floor((Date.now() - leaveDate) / 1000)
-                  } seconds`,
+                  // body: `All messages will disappear in ${
+                  //   100 - Math.floor((Date.now() - leaveDate) / 1000)
+                  // } seconds`,
+                  body: `You've been gone for ${Math.floor(
+                    (Date.now() - leaveDate) / 1000
+                  )} seconds`,
                   icon: 'https://i.shgcdn.com/4a3ef1db-194d-4444-b1cf-ecc4e980a86c/-/format/auto/-/preview/3000x3000/-/quality/lighter/',
                   tag: 'Come Back',
                 }

@@ -31,7 +31,7 @@ export default async function handler(
 
   // To redis key value store
   await redis.hset('messages', message.id, JSON.stringify(newMessage))
-  await redis.expire('messages', 100)
+  // await redis.expire('messages', 100)
   serverPusher.trigger('messages', 'new-message', newMessage)
 
   res.status(200).json({ message: newMessage })
