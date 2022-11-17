@@ -43,12 +43,14 @@ async function Header() {
     <header className="sticky top-0 z-50 bg-white justify-center items-center p-10 shadow-sm">
       <div className="flex flex-col items-center space-y-5">
         <div className="flex space-x-2 items center">
-          <Image
-            src="https://i.shgcdn.com/4a3ef1db-194d-4444-b1cf-ecc4e980a86c/-/format/auto/-/preview/3000x3000/-/quality/lighter/"
-            alt="logo"
-            height="600"
-            width="600"
-          />
+          <Link href="/">
+            <Image
+              src="https://i.shgcdn.com/4a3ef1db-194d-4444-b1cf-ecc4e980a86c/-/format/auto/-/preview/3000x3000/-/quality/lighter/"
+              alt="logo"
+              height="600"
+              width="600"
+            />
+          </Link>
         </div>
         <p className="text-gray-600">It's Myco</p>
         <Link
