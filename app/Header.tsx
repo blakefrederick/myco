@@ -4,8 +4,11 @@ import Image from 'next/image'
 import LogoutButton from './LogoutButton'
 import { unstable_getServerSession } from 'next-auth'
 
-async function Header() {
-  const session = await unstable_getServerSession()
+type Props = {
+  session: Awaited<ReturnType<typeof unstable_getServerSession>>
+}
+
+function Header({ session }: Props) {
   const isGithub = session?.user?.image?.includes('github')
   const isFacebook = session?.user?.image?.includes('fbsbx')
   const isTwitter = session?.user?.image?.includes('twimg')
