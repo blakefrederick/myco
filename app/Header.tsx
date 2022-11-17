@@ -27,10 +27,11 @@ async function Header() {
             <p
               className={`text-2xs px-[1px] pb-[1px] ${
                 isFacebook && 'text-blue-300'
-              } ${isGithub && 'text-gray-300'}`}
+              } ${isGithub && 'text-gray-300'} ${isTwitter && 'text-sky-400'}`}
             >
               {isFacebook && 'Signed in with Facebook'}
               {isGithub && 'Signed in with Github'}
+              {isTwitter && 'Signed in with Twitter'}
             </p>
           </div>
         </div>
