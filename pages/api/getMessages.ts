@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import redis from '../../redis'
-import { Message } from '../../typings'
+import redis from 'lib/redis'
+import { Message } from 'typings'
 
 type Data = {
   messages: Message[]

@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
-import { Message } from '../typings'
+import { Message } from 'typings'
 import DeleteButton from './DeleteButton'
 
 type Props = {
