@@ -1,11 +1,11 @@
 'use client'
 
 import React, { useEffect } from 'react'
-import { Message } from '../typings'
+import { Message } from 'typings'
 import useSWR from 'swr'
-import fetcher from '../utils/fetchMessages'
+import fetcher from 'utils/fetchMessages'
 import MessageComponent from './MessageComponent'
-import { clientPusher } from '../pusher'
+import { clientPusher } from 'lib/pusher'
 
 function MessageList() {
   const {

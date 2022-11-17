@@ -2,7 +2,7 @@ import NextAuth from 'next-auth'
 import FacebookProvider from 'next-auth/providers/facebook'
 import GitHubProvider from 'next-auth/providers/github'
 import TwitterProvider from 'next-auth/providers/twitter'
-import SpotifyProvider from 'next-auth/providers/spotify'
+// import SpotifyProvider from 'next-auth/providers/spotify'
 
 export const authOptions = {
   providers: [

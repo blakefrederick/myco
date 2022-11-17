@@ -1,9 +1,9 @@
 'use client'
 
 import { FormEvent, useState } from 'react'
-import { Message } from '../typings'
+import { Message } from 'typings'
 import useSWR from 'swr'
-import fetcher from '../utils/fetchMessages'
+import fetcher from 'utils/fetchMessages'
 import { unstable_getServerSession } from 'next-auth'
 
 type Props = {
