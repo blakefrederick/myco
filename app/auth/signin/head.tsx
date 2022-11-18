@@ -1,5 +1,5 @@
 function Head() {
-  return <div>Sign in to Messenger</div>
+  return <div></div>
 }
 
 export default Head

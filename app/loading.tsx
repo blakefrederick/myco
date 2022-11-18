@@ -1,5 +1,5 @@
 function loading() {
-  return <div>loading</div>
+  return <div className="flex flex-col items-center">Loading</div>
 }
 
 export default loading

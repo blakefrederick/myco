@@ -10,7 +10,7 @@ function SignInComponent({ providers }: Props) {
   return (
     <div className="justify-center">
       {Object.values(providers!).map((provider) => (
-        <div key={provider.name} className={` flex flex-col items-center`}>
+        <div key={provider.name} className={`flex flex-col items-center`}>
           <button
             className={`${provider.name === 'Facebook' && 'bg-Facebook'} ${
               provider.name === 'GitHub' && 'bg-GitHub'
