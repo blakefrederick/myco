@@ -16,7 +16,7 @@ Authenticate with different platforms to apply different message background colo
 
 Messages are ephemeral. After 100 seconds of chat inactivity, the entire chat history is wiped from storage. [Currently disabled for testing purposes]
 
-Delete your regrettable messgaes.
+Delete your regrettable messages.
 
 A stream of annoying notifications to entice you back to the app upon leaving. [Currently enabled for learning purposes]
 
