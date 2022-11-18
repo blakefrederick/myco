@@ -28,8 +28,8 @@ function Header({ session }: Props) {
             <p className="font-bold text-lg">{session.user?.name}</p>
             <p
               className={`text-2xs px-[1px] pb-[1px] ${
-                isFacebook && 'text-blue-300'
-              } ${isGithub && 'text-gray-300'} ${isTwitter && 'text-sky-400'}`}
+                isFacebook && 'text-Facebook'
+              } ${isGithub && 'text-GitHub'} ${isTwitter && 'text-Twitter'}`}
             >
               {isFacebook && 'Signed in with Facebook'}
               {isGithub && 'Signed in with Github'}

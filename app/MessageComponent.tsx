@@ -32,9 +32,9 @@ function MessageComponent({ message }: Props) {
       <div>
         <p
           className={`text-2xs px-[2px] pb-[2px] ${isUser && 'text-right'} ${
-            isFacebook && 'text-blue-400'
-          } ${isGithub && 'text-gray-400'}
-          ${isTwitter && 'text-sky-400'}`}
+            isFacebook && 'text-Facebook'
+          } ${isGithub && 'text-GitHub'}
+          ${isTwitter && 'text-Twitter'}`}
         >
           {message.username}
         </p>
@@ -42,13 +42,20 @@ function MessageComponent({ message }: Props) {
           <div
             className={`px-3 py-2 rounded-lg w-fit text-white ${
               isUser && 'text-right ml-auto order-2'
-            } ${isFacebook && 'bg-blue-400'} ${isGithub && 'bg-gray-400'} ${
-              isTwitter && 'bg-sky-400'
+            } ${isFacebook && 'bg-Facebook'} ${isGithub && 'bg-GitHub'} ${
+              isTwitter && 'bg-Twitter'
             }`}
           >
             <p>{message.message}</p>
           </div>
         </div>
+        <p
+          className={`text-2xs px-[1px] pb-[1px] ${isUser && 'text-right'} ${
+            isFacebook && 'text-Facebook'
+          } ${isGithub && 'text-GitHub'} ${isTwitter && 'text-Twitter'}`}
+        >
+          Message sent via {message.service}
+        </p>
         <p
           className={`text-2xs italic text-gray-300 ${isUser && 'text-right'}`}
         >
@@ -56,15 +63,8 @@ function MessageComponent({ message }: Props) {
         </p>
         <p
           className={`text-2xs px-[1px] pb-[1px] ${isUser && 'text-right'} ${
-            isFacebook && 'text-blue-300'
-          } ${isGithub && 'text-gray-300'} ${isTwitter && 'text-sky-400'}`}
-        >
-          Message sent via {message.service}
-        </p>
-        <p
-          className={`text-2xs px-[1px] pb-[1px] ${isUser && 'text-right'} ${
-            isFacebook && 'text-blue-300'
-          } ${isGithub && 'text-gray-300'} ${isTwitter && 'text-sky-400'}`}
+            isFacebook && 'text-Facebook'
+          } ${isGithub && 'text-GitHub'} ${isTwitter && 'text-Twitter'}`}
         >
           {isUser && <DeleteButton session={session} message={message} />}
         </p>
