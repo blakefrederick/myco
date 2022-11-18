@@ -2,6 +2,7 @@ import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { Message } from 'typings'
 import DeleteButton from './DeleteButton'
+import Heart from './Heart'
 
 type Props = {
   key: string
@@ -41,13 +42,14 @@ function MessageComponent({ message }: Props) {
         <div className="flex items-end">
           <div
             className={`px-3 py-2 rounded-lg w-fit text-white ${
-              isUser && 'text-right ml-auto order-2'
+              isUser && 'text-right order-2'
             } ${isFacebook && 'bg-Facebook'} ${isGithub && 'bg-GitHub'} ${
               isTwitter && 'bg-Twitter'
             }`}
           >
             <p>{message.message}</p>
           </div>
+          <Heart owner={isUser ? 'mine' : 'theirs'} />
         </div>
         <p
           className={`text-2xs px-[1px] pb-[1px] ${isUser && 'text-right'} ${
@@ -57,7 +59,9 @@ function MessageComponent({ message }: Props) {
           Message sent via {message.service}
         </p>
         <p
-          className={`text-2xs italic text-gray-300 ${isUser && 'text-right'}`}
+          className={`flex justify-end text-2xs italic text-gray-300 ${
+            isUser && 'text-right'
+          }`}
         >
           {new Date(message.created_at).toLocaleString()}
         </p>

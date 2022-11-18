@@ -1,0 +1,10 @@
+.heart {
+  width: 16px;
+  height: 16px;
+  background: url(https://i.imgur.com/eOwceFl.png) no-repeat;
+  cursor: pointer;
+}
+.blast {
+  background-position: -448px 0;
+  transition: background 1s steps(28);
+}

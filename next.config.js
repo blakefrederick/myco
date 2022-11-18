@@ -12,6 +12,8 @@ module.exports = {
       'platform-lookaside.fbsbx.com',
       'avatars.githubusercontent.com',
       'pbs.twimg.com',
+      'imagizer.imageshack.com',
+      'i.imgur.com/eOwceFl.png',
     ],
   },
 }
