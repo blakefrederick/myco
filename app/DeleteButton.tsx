@@ -44,10 +44,7 @@ function DeleteButton({ session, message }: Props) {
     const deleteUpstashResult = await deleteMessageFromUpstash()
     console.log('deleteUpstashResult', deleteUpstashResult)
 
-    // await mutate(deleteMessageFromUpstash, {
-    //   optimisticData: [message, ...messages!],
-    //   rollbackOnError: true,
-    // })
+    await mutate(fetcher)
   }
   return (
     <>
