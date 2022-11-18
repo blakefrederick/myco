@@ -20,8 +20,8 @@ function Header({ session }: Props) {
             className="rounded-full mx-2 object-contain"
             src={session.user?.image!}
             alt="Profile Picture"
-            height="55"
-            width="55"
+            height="65"
+            width="65"
           />
           <div>
             <p className="text-blue-400">Logged in as:</p>
