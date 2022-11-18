@@ -15,7 +15,7 @@ async function SignInPage() {
           alt="Sign In"
         />
       </div>
-      <SignInComponent providers={providers} />
+      {providers && <SignInComponent providers={providers} />}
     </div>
   )
 }
