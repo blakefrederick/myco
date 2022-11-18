@@ -19,7 +19,7 @@ A stream of annoying notifications to entice you back to the app upon leaving. [
 A replica of the Twitter heart animation (web version) to like messages. [Testing]
 
 <kbd>
-<img alt="myco-screen" width="400px" src="https://user-images.githubusercontent.com/4672139/201588538-8a88b882-aafc-4720-b447-f591d3abc774.png">
+<img width="478" alt="Screenshot 2022-11-17 at 10 32 56 PM" src="https://user-images.githubusercontent.com/4672139/202636618-30b7dcdb-4b76-4b2d-a295-28c6133b1595.png">
 </kbd>
 <br/>
 <br/>
