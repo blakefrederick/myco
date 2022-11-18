@@ -2,9 +2,11 @@
 
 ## Cross-Platform Messaging
 
-Just another project to practice new development techniques and reinforce existing paradigms.
+Fully funded messaging app with one single timeline shared between all users. (Testing)
 
 Features may include:
+
+One timeline only.
 
 Authenticate with different platforms to apply different message background colours (very important).
 
@@ -14,12 +16,14 @@ Authenticate with different platforms to apply different message background colo
 
 Messages are ephemeral. After 100 seconds of chat inactivity, the entire chat history is wiped from storage. [Currently disabled for testing purposes]
 
+Delete your regrettable messgaes.
+
 A stream of annoying notifications to entice you back to the app upon leaving. [Currently enabled for learning purposes]
 
 A replica of the Twitter heart animation (web version) to like messages. [Testing]
 
 <kbd>
-<img width="478" alt="Screenshot 2022-11-17 at 10 32 56 PM" src="https://user-images.githubusercontent.com/4672139/202636618-30b7dcdb-4b76-4b2d-a295-28c6133b1595.png">
+<img width="478" alt="Myco Screenshot" src="https://user-images.githubusercontent.com/4672139/202636618-30b7dcdb-4b76-4b2d-a295-28c6133b1595.png">
 </kbd>
 <br/>
 <br/>
