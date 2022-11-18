@@ -14,7 +14,9 @@ type Props = {
 function DeleteButton({ session, message }: Props) {
   const [input, setInput] = useState('')
   const { data: messages, error, mutate } = useSWR('/api/getMessages', fetcher)
-  const isUser = session?.user?.email === message.email
+  const isUser =
+    session?.user?.image === message.profilePic || // This doesn't work with Spotify because it uses the exact same profile pic URL as Facebook
+    session?.user?.email === message.email // absurd assumption here about cross-platform email synchronicity
   // Optimistic fetch data pattern:
   // 1. Update immediately in the client, assuming the fetch request will succeed
   // 2. If the value returned from fetch matches our optimistic guess, then great

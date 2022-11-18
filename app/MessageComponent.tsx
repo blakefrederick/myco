@@ -10,10 +10,13 @@ type Props = {
 
 function MessageComponent({ message }: Props) {
   const { data: session } = useSession()
-  const isUser = session?.user?.email === message.email
+  const isUser = session?.user?.image === message.profilePic
   const isGithub = message.service === 'Github'
   const isFacebook = message.service === 'Facebook'
   const isTwitter = message.service === 'Twitter'
+
+  console.log(session)
+  console.log(message)
 
   return (
     <div className={`flex w-fit ${isUser && 'ml-auto'}`}>
