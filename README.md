@@ -27,5 +27,12 @@ A replica of the Twitter heart animation (web version) to like messages. [Testin
 </kbd>
 <br/>
 <br/>
+
+<p>Soon, maybe:</p>
+<ul>
+<li>Instagram auth</li>
+<li>No auth</li>
+<li>Bitcoin payments</li>
+</ul>
 <p>Tech + services used: Next.js 13 + Tailwind CSS + Upstash + Redis + Pusher + SWR + NextAuth + Facebook, Github, Twitter Authentication</p>
 <p>Props: Sonny Sangha https://www.youtube.com/watch?v=T2jKJF4BZOY for the prompt and getting me started, Max Proske for helpful advice</p>
