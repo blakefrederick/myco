@@ -2,9 +2,11 @@
 
 ## Cross-Platform Messaging
 
-Just another project to practice new development techniques and reinforce existing paradigms.
+Fully funded messaging app with one single timeline shared between all users. (Educational)
 
 Features may include:
+
+One timeline only.
 
 Authenticate with different platforms to apply different message background colours (very important).
 
@@ -15,14 +17,22 @@ Authenticate with different platforms to apply different message background colo
 
 Messages are ephemeral. After 100 seconds of chat inactivity, the entire chat history is wiped from storage. [Currently disabled for testing purposes]
 
+Delete your regrettable messages.
+
 A stream of annoying notifications to entice you back to the app upon leaving. [Currently disabled because annoying]
 
 A replica of the Twitter heart animation (web version) to like messages. [Still testing]
 
 <kbd>
-<img alt="myco-screen" width="400px" src="https://user-images.githubusercontent.com/4672139/201588538-8a88b882-aafc-4720-b447-f591d3abc774.png">
+<img width="478" alt="Myco Screenshot" src="https://user-images.githubusercontent.com/4672139/202636618-30b7dcdb-4b76-4b2d-a295-28c6133b1595.png">
 </kbd>
 <br/>
 <br/>
+
+<p>Soon, maybe:</p>
+<ul>
+<li>Instagram auth</li>
+<li>Bitcoin payments</li>
+</ul>
 <p>Tech + services used: Next.js 13 + Tailwind CSS + Upstash + Redis + Pusher + SWR + NextAuth + Facebook, Github, Twitter Authentication</p>
 <p>Props: Sonny Sangha https://www.youtube.com/watch?v=T2jKJF4BZOY for the prompt and getting me started, Max Proske for helpful advice</p>
