@@ -14,7 +14,7 @@ function Header({ session }: Props) {
 
   if (session)
     return (
-      <header className="sticky top-0 z-50 bg-white flex justify-between items-center p-10 shadow-sm">
+      <header className="sticky top-0 z-50 bg-white flex justify-between items-center shadow-sm">
         <div className="flex space-x-2">
           <Image
             className="rounded-full mx-2 object-contain"
