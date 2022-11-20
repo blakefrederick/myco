@@ -2,7 +2,7 @@ import NextAuth from 'next-auth'
 import FacebookProvider from 'next-auth/providers/facebook'
 import GitHubProvider from 'next-auth/providers/github'
 import TwitterProvider from 'next-auth/providers/twitter'
-// import SpotifyProvider from 'next-auth/providers/spotify'
+import SpotifyProvider from 'next-auth/providers/spotify'
 import { cloneDeep } from 'tailwindcss/lib/util/cloneDeep'
 
 export const authOptions = {
@@ -31,10 +31,14 @@ export const authOptions = {
     // }),
   ],
   callbacks: {
-    async jwt({ token, user, account, profile, isNewUser }) {
+    async jwt({ token, user, account, profile }) {
       console.log('profile', profile)
+      console.log('token', token)
+      console.log('account', account)
+      console.log('user', user)
       if (profile) {
         token['userProfile'] = {
+          service: account?.provider,
           followersCount: profile.followers_count,
           twitterHandle: profile.screen_name,
           followingCount: profile.friends_count,
