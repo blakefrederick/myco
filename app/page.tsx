@@ -3,6 +3,7 @@ import ChatInput from './ChatInput'
 import { Message } from 'typings'
 import { unstable_getServerSession } from 'next-auth/next'
 import { Providers } from './providers'
+import { isIOS } from 'react-device-detect'
 
 async function HomePage() {
   // const data = await fetch(`${process.env.VERCEL_URL}/api/getMessages`).then(
