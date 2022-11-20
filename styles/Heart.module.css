@@ -1,10 +1,16 @@
 .heart {
-  width: 16px;
-  height: 16px;
-  background: url(https://i.imgur.com/eOwceFl.png) no-repeat;
+  position: relative;
+  top: 15px;
+  right: 13px;
+  width: 48px;
+  height: 48px;
+  background: url(https://i.imgur.com/vkVrldi.png) no-repeat;
   cursor: pointer;
 }
+.mine {
+  right: -13px;
+}
 .blast {
-  background-position: -448px 0;
+  background-position: -1344px 0;
   transition: background 1s steps(28);
 }

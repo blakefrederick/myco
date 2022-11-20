@@ -13,7 +13,7 @@ module.exports = {
       'avatars.githubusercontent.com',
       'pbs.twimg.com',
       'imagizer.imageshack.com',
-      'i.imgur.com/eOwceFl.png',
+      'i.imgur.com',
     ],
   },
 }

@@ -12,9 +12,9 @@ export default function Heart({ owner }: Props) {
   }
   return (
     <div
-      className={`${styles.heart} ${isFilled ? styles.blast : ''} justify-end ${
+      className={`${styles.heart} ${isFilled && styles.blast} justify-end ${
         owner === 'mine' && 'ml-auto'
-      }`}
+      } ${owner === 'mine' && styles.mine}`}
       onClick={toggleFill}
     ></div>
   )
