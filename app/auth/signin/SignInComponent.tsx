@@ -23,7 +23,9 @@ function SignInComponent({ providers }: Props) {
                 provider.name === 'GitHub' && 'bg-GitHub'
               }
           ${
-            provider.name === 'Twitter' && 'bg-Twitter'
+            (provider.name === 'Twitter' ||
+              provider.name === 'Twitter (Legacy)') &&
+            'bg-Twitter'
           }  text-white font-bold my-4 py-2 px-4 rounded`}
               onClick={() =>
                 signIn(provider.id, {
@@ -32,7 +34,8 @@ function SignInComponent({ providers }: Props) {
                 })
               }
             >
-              Sign in with {provider.name}
+              Sign in with{' '}
+              {provider.name === 'Twitter (Legacy)' ? 'Twitter' : provider.name}
             </button>
           </div>
         ))
