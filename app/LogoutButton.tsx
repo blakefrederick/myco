@@ -7,12 +7,8 @@ function LogoutButton() {
   const [buttonText, setButtonText] = useState('Logout')
 
   const processSignOut = () => {
-    if (buttonText !== 'No') {
-      setButtonText('No')
-    } else {
-      setButtonText('Okay! Signing Out')
-      signOut()
-    }
+    setButtonText('Okay! Signing Out')
+    signOut()
   }
   return (
     <button
