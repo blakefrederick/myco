@@ -21,6 +21,15 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "typings.d.ts"],
+  "include": [
+    "next-env.d.ts",
+    "types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "typings.d.ts",
+    "pages/api/auth/[...nextauth].js",
+    "pages/api/twitter/user.js"
+  ],
   "exclude": ["node_modules"]
 }

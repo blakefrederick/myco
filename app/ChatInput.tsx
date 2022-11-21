@@ -39,7 +39,10 @@ function ChatInput({ session }: Props) {
       username: session?.user?.name!,
       profilePic: session?.user?.image!,
       email: session?.user?.email!,
-      service: service.charAt(0).toUpperCase() + service.slice(1),
+      service:
+        typeof service === 'string'
+          ? service.charAt(0).toUpperCase() + service.slice(1)
+          : 'anonymous',
     }
 
     const uploadMessageToUpstash = async () => {

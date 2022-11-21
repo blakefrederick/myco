@@ -1,19 +1,7 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
 import { getToken } from 'next-auth/jwt'
 import Twitter from 'twitter-lite'
 
-type Data = {
-  success: boolean
-}
-
-type ErrorData = {
-  body: string
-}
-
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data | ErrorData>
-) {
+export default async function handler(req, res) {
   const token = await getToken({
     req,
     secret: process.env.NEXTAUTH_SECRET,
