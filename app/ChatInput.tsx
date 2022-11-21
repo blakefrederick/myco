@@ -6,6 +6,7 @@ import { Message } from 'typings'
 import useSWR from 'swr'
 import fetcher from 'utils/fetchMessages'
 import { unstable_getServerSession } from 'next-auth'
+import { getCookie } from 'cookies-next'
 
 type Props = {
   session: Awaited<ReturnType<typeof unstable_getServerSession>>
@@ -14,16 +15,8 @@ type Props = {
 function ChatInput({ session }: Props) {
   const [input, setInput] = useState('')
   const { data: messages, error, mutate } = useSWR('/api/getMessages', fetcher)
-  const isGithub = session?.user?.image?.includes('github')
-  const isFacebook = session?.user?.image?.includes('fbsbx')
-  const isTwitter = session?.user?.image?.includes('twimg')
-  const service = isFacebook
-    ? 'Facebook'
-    : isGithub
-    ? 'Github'
-    : isTwitter
-    ? 'Twitter'
-    : ''
+  const service = getCookie('service')
+
   // Optimistic fetch data pattern:
   // 1. Update immediately in the client, assuming the fetch request will succeed
   // 2. If the value returned from fetch matches our optimistic guess, then great
@@ -46,7 +39,7 @@ function ChatInput({ session }: Props) {
       username: session?.user?.name!,
       profilePic: session?.user?.image!,
       email: session?.user?.email!,
-      service,
+      service: service.charAt(0).toUpperCase() + service.slice(1),
     }
 
     const uploadMessageToUpstash = async () => {

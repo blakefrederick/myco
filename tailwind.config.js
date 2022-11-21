@@ -15,6 +15,7 @@ module.exports = {
         Facebook: '#4267B2',
         GitHub: '#171515',
         Twitter: '#1DA1F2',
+        Spotify: '#1DB954',
       },
     },
   },

@@ -15,9 +15,10 @@ function MessageComponent({ message }: Props) {
   const isGithub = message.service === 'Github'
   const isFacebook = message.service === 'Facebook'
   const isTwitter = message.service === 'Twitter'
+  const isSpotify = message.service === 'Spotify'
 
-  console.log(session)
-  console.log(message)
+  console.log('session', session)
+  console.log('message', message)
 
   return (
     <div className={`flex w-fit ${isUser && 'ml-auto'}`}>
@@ -35,7 +36,7 @@ function MessageComponent({ message }: Props) {
           className={`text-2xs px-[2px] pb-[2px] ${isUser && 'text-right'} ${
             isFacebook && 'text-Facebook'
           } ${isGithub && 'text-GitHub'}
-          ${isTwitter && 'text-Twitter'}`}
+          ${isTwitter && 'text-Twitter'} ${isSpotify && 'text-Spotify'}`}
         >
           {message.username}
         </p>
@@ -45,7 +46,7 @@ function MessageComponent({ message }: Props) {
               isUser && 'text-right order-2'
             } ${isFacebook && 'bg-Facebook'} ${isGithub && 'bg-GitHub'} ${
               isTwitter && 'bg-Twitter'
-            }`}
+            } ${isSpotify && 'bg-Spotify'}`}
           >
             <p>{message.message}</p>
           </div>
@@ -54,7 +55,9 @@ function MessageComponent({ message }: Props) {
         <p
           className={`text-2xs px-[1px] pb-[1px] ${isUser && 'text-right'} ${
             isFacebook && 'text-Facebook'
-          } ${isGithub && 'text-GitHub'} ${isTwitter && 'text-Twitter'}`}
+          } ${isGithub && 'text-GitHub'} ${isTwitter && 'text-Twitter'} ${
+            isSpotify && 'text-Spotify'
+          }`}
         >
           Message sent via {message.service}
         </p>
@@ -68,7 +71,9 @@ function MessageComponent({ message }: Props) {
         <p
           className={`text-2xs px-[1px] pb-[1px] ${isUser && 'text-right'} ${
             isFacebook && 'text-Facebook'
-          } ${isGithub && 'text-GitHub'} ${isTwitter && 'text-Twitter'}`}
+          } ${isGithub && 'text-GitHub'} ${isTwitter && 'text-Twitter'} ${
+            isSpotify && 'text-Spotify'
+          }`}
         >
           {isUser && <DeleteButton session={session} message={message} />}
         </p>

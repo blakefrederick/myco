@@ -26,7 +26,9 @@ function SignInComponent({ providers }: Props) {
             (provider.name === 'Twitter' ||
               provider.name === 'Twitter (Legacy)') &&
             'bg-Twitter'
-          }  text-white font-bold my-4 py-2 px-4 rounded`}
+          } ${
+                provider.name === 'Spotify' && 'bg-Spotify'
+              }  text-white font-bold my-4 py-2 px-4 rounded`}
               onClick={() =>
                 signIn(provider.id, {
                   callbackUrl:

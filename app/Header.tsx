@@ -5,6 +5,7 @@ import Image from 'next/image'
 import LogoutButton from './LogoutButton'
 import { unstable_getServerSession } from 'next-auth'
 import { usePathname } from 'next/navigation'
+import { getCookie } from 'cookies-next'
 
 type Props = {
   session: Awaited<ReturnType<typeof unstable_getServerSession>>
@@ -12,9 +13,11 @@ type Props = {
 
 function Header({ session }: Props) {
   const isGithub = session?.user?.image?.includes('github')
-  const isFacebook = session?.user?.image?.includes('fbsbx')
   const isTwitter = session?.user?.image?.includes('twimg')
   const pathname = usePathname()
+  const service = getCookie('service')
+  const isSpotify = service === 'spotify'
+  const isFacebook = session?.user?.image?.includes('fbsbx') && !isSpotify
 
   if (pathname?.split('/')[1] === 'preview')
     return (
@@ -53,11 +56,14 @@ function Header({ session }: Props) {
             <p
               className={`text-2xs px-[1px] pb-[1px] ${
                 isFacebook && 'text-Facebook'
-              } ${isGithub && 'text-GitHub'} ${isTwitter && 'text-Twitter'}`}
+              } ${isGithub && 'text-GitHub'} ${isTwitter && 'text-Twitter'} ${
+                isSpotify && 'text-Spotify'
+              }`}
             >
               {isFacebook && 'Signed in with Facebook'}
               {isGithub && 'Signed in with Github'}
               {isTwitter && 'Signed in with Twitter'}
+              {isSpotify && 'Signed in with Spotify'}
             </p>
           </div>
         </div>
