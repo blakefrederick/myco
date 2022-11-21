@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { getProviders } from 'next-auth/react'
 import SignInComponent from './SignInComponent'
 
-async function SignInPage() {
+async function SignInPage({ searchParams }: { searchParams: { dev: string } }) {
   const providers = await getProviders()
   return (
     <div className="grid justify-center">
@@ -15,7 +15,9 @@ async function SignInPage() {
           alt="Sign In"
         />
       </div>
-      {providers && <SignInComponent providers={providers} />}
+      {providers && (
+        <SignInComponent providers={providers} dev={searchParams.dev} />
+      )}
     </div>
   )
 }

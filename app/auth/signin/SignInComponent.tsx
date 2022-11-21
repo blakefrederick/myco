@@ -5,12 +5,13 @@ import { isIOS } from 'react-device-detect'
 
 type Props = {
   providers: Awaited<ReturnType<typeof getProviders>>
+  dev: string
 }
 
-function SignInComponent({ providers }: Props) {
+function SignInComponent({ providers, dev }: Props) {
   return (
     <div className="justify-center">
-      {isIOS ? (
+      {isIOS && dev !== 'true' ? (
         <>
           <p className="mx-auto">Regrettably, sign in doesn't work on iOS. </p>
           <p className="mx-auto">The developer is still figuring things out.</p>
