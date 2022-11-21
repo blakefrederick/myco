@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { getProviders } from 'next-auth/react'
 import SignInComponent from './SignInComponent'
 
-async function SignInPage({ searchParams }: { searchParams: { dev: string } }) {
+async function SignInPage({ params, searchParams }: any) {
   const providers = await getProviders()
   return (
     <div className="grid justify-center">
