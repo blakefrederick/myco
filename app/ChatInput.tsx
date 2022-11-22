@@ -5,17 +5,16 @@ import { v4 as uuid } from 'uuid'
 import { Message } from 'typings'
 import useSWR from 'swr'
 import fetcher from 'utils/fetchMessages'
-import { unstable_getServerSession } from 'next-auth'
-import { getCookie } from 'cookies-next'
+import { useSession } from 'next-auth/react'
 
-type Props = {
-  session: Awaited<ReturnType<typeof unstable_getServerSession>>
-}
-
-function ChatInput({ session }: Props) {
+function ChatInput() {
+  const { data: session } = useSession()
   const [input, setInput] = useState('')
   const { data: messages, error, mutate } = useSWR('/api/getMessages', fetcher)
-  const service = getCookie('service')
+
+  const service = session?.service || 'Anonymous'
+
+  console.log('session ChatInput ', session)
 
   // Optimistic fetch data pattern:
   // 1. Update immediately in the client, assuming the fetch request will succeed
@@ -42,7 +41,7 @@ function ChatInput({ session }: Props) {
       service:
         typeof service === 'string'
           ? service.charAt(0).toUpperCase() + service.slice(1)
-          : 'anonymous',
+          : 'Anonymous',
     }
 
     const uploadMessageToUpstash = async () => {

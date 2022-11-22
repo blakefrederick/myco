@@ -56,8 +56,8 @@ export const authOptions = {
       return token
     },
     async session({ session, token, user }) {
-      console.log('called session')
-      return session
+      session.service = token?.userProfile?.service
+      return Promise.resolve(session)
       // Send properties to the client, like an access_token from a provider.
       // let userData = cloneDeep(token.userProfile)
       // delete userData.userID

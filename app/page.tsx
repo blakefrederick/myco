@@ -4,19 +4,14 @@ import { unstable_getServerSession } from 'next-auth/next'
 import { Providers } from './providers'
 
 async function HomePage() {
-  // const data = await fetch(`${process.env.VERCEL_URL}/api/getMessages`).then(
-  //   (res) => res.json()
-  // )
-
-  // const messages: Message[] = data.messages // this and fetch unused because it's not passed to MessageList
+  // Doesn't contain my customer session vars so using useSession in ChatInput, MessageList instead of passing as prop
   const session = await unstable_getServerSession()
-  console.log('session', session)
 
   return (
     <Providers session={session}>
       <main>
         {session && <MessageList />}
-        {session && <ChatInput session={session} />}
+        {session && <ChatInput />}
         <h1 className="text-center">🎔</h1>
       </main>
     </Providers>

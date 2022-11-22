@@ -9,8 +9,9 @@ declare module 'next-auth' {
     user: {
       image: string
       name: string
-      email: email
+      email: string
     }
+    service: string
   }
 }
 
