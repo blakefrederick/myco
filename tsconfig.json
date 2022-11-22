@@ -28,8 +28,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "typings.d.ts",
-    "pages/api/auth/[...nextauth].js",
-    "pages/api/twitter/user.js"
+    "pages/api/auth/[...nextauth].js"
   ],
   "exclude": ["node_modules"]
 }
