@@ -72,7 +72,7 @@ function Header({ session }: Props) {
     )
 
   return (
-    <header className="sticky top-0 z-50 bg-white justify-center items-center">
+    <header className="top-0 z-50 bg-white justify-center items-center">
       <div className="flex flex-col items-center space-y-5 mb-10">
         <div className="flex space-x-2 items center">
           <Link href="/">
