@@ -13,7 +13,7 @@ function MessageComponent({ message }: Props) {
   const { data: session } = useSession()
   const isUser =
     session?.user?.email === message.email &&
-    session?.service.charAt(0).toUpperCase() + session?.service.slice(1) ===
+    session?.service?.charAt(0)?.toUpperCase() + session?.service?.slice(1) ===
       message.service
   const isGithub = message.service === 'Github'
   const isFacebook = message.service === 'Facebook'

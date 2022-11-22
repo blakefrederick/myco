@@ -40,7 +40,7 @@ function ChatInput() {
       email: session?.user?.email!,
       service:
         typeof service === 'string'
-          ? service.charAt(0).toUpperCase() + service.slice(1)
+          ? service?.charAt(0)?.toUpperCase() + service?.slice(1)
           : 'Anonymous',
     }
 
