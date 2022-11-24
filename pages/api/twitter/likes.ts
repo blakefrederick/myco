@@ -26,8 +26,14 @@ export default async function handler(
     const readOnlyClient = twitterClient.readOnly
 
     const user = await readOnlyClient.v2.userByUsername('blakefrederick')
+
+    let likedTweets = await readOnlyClient.v2.userLikedTweets(user.data.id)
+    console.log(likedTweets.tweets[0].id)
+
+    await likedTweets.fetchNext()
+
     return res.status(200).json({
-      ...user,
+      ...likedTweets,
     })
   } catch (error: unknown) {
     res.status(500).send({ error })
