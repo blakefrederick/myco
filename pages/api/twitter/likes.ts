@@ -27,9 +27,14 @@ export default async function handler(
 
     const user = await readOnlyClient.v2.userByUsername('blakefrederick')
 
-    let likedTweets = await readOnlyClient.v2.userLikedTweets(user.data.id)
-    console.log(likedTweets.tweets[0].id)
-
+    const likedTweets = await readOnlyClient.v2.userLikedTweets(user.data.id)
+    // Get lots of likes!
+    // Programmer's note: Items will be added to current instance and next calls to .tweets or Symbol.iterator will include previously fetched tweets and new tweets.
+    await likedTweets.fetchNext()
+    await likedTweets.fetchNext()
+    await likedTweets.fetchNext()
+    await likedTweets.fetchNext()
+    await likedTweets.fetchNext()
     await likedTweets.fetchNext()
 
     return res.status(200).json({
