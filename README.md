@@ -11,9 +11,10 @@ One timeline only.
 Authenticate with different platforms to apply different message background colours (very important).
 
 <img valign='middle' alt='blue' src='https://readme-swatches.vercel.app/4267B2'/> Sign in with Facebook<br/>
-<img valign='middle' alt='blue' src='https://readme-swatches.vercel.app/1DA1F2'/> Sign in with Twitter<br/>
-<img valign='middle' alt='blue' src='https://readme-swatches.vercel.app/171515'/> Sign in with Github<br/>
-<img valign='middle' alt='blue' src='https://readme-swatches.vercel.app/8899A6'/> Preview Mode <sup style="color: red;">New</sup>
+<img valign='middle' alt='light blue' src='https://readme-swatches.vercel.app/1DA1F2'/> Sign in with Twitter<br/>
+<img valign='middle' alt='black' src='https://readme-swatches.vercel.app/171515'/> Sign in with Github<br/>
+<img valign='middle' alt='green' src='https://readme-swatches.vercel.app/1DB954'/> Sign in with Spotify<br/>
+<img valign='middle' alt='grey' src='https://readme-swatches.vercel.app/8899A6'/> Preview Mode <sup style="color: red;">New</sup>
 
 Messages are ephemeral. After 100 seconds of chat inactivity, the entire chat history is wiped from storage. [Currently disabled for testing purposes]
 
@@ -31,6 +32,7 @@ A replica of the Twitter heart animation (web version) to like messages. [Still 
 
 <p>Soon, maybe:</p>
 <ul>
+<li>Twitter things</li>
 <li>Instagram auth</li>
 <li>Bitcoin payments</li>
 <li>End-to-end encryption</li>
