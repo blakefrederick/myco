@@ -26,6 +26,19 @@ function ChatInput() {
 
     if (!input || !session) return
 
+    // Type like to get your most recent like
+    if (input === 'like') {
+      const likedTweet = await fetch('/api/twitter/likes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then((res) => res.json())
+
+      setInput(likedTweet._realData.data[0].text)
+      return
+    }
+
     const messageToSend = input
     setInput('')
 
