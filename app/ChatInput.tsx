@@ -1,6 +1,6 @@
 'use client'
 
-import { FormEvent, useState, useRef } from 'react'
+import { FormEvent, useState, useRef, useEffect } from 'react'
 import { v4 as uuid } from 'uuid'
 import { Message } from 'typings'
 import useSWR from 'swr'
@@ -24,6 +24,21 @@ function ChatInput() {
   // 1. Update immediately in the client, assuming the fetch request will succeed
   // 2. If the value returned from fetch matches our optimistic guess, then great
   // 3. Otherwise, rollback
+
+  const handleChatKey = (e) => {
+    // After retrieving a tweet, only allow submit or delete
+    if (twitterSuccess) {
+      if (e.key === 'Backspace') {
+        setInput('')
+        setTwitterSuccess(false)
+      } else if (e.key === 'Enter') {
+        // be silent
+      } else {
+        e.preventDefault()
+        // Jiggle the input field or something to indicate op not allowed
+      }
+    }
+  }
 
   const addMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -140,6 +155,7 @@ function ChatInput() {
         disabled={!session || keywordFetching}
         placeholder="What's happening?"
         onChange={(e) => setInput(e.target.value)}
+        onKeyDown={(e) => handleChatKey(e)}
         className={`what-is-happening flex-1 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent px-5 py-3 disabled:opacity-50 diabled:cursor-not-allowed ${
           twitterSuccess && 'twitter-success'
         }`}
