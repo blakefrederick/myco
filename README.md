@@ -2,11 +2,11 @@
 
 ## Cross-Platform Messaging
 
-Fully funded messaging app with one single timeline shared between all users. (Educational)
+Fully funded messaging app with one single timeline shared between all users. (Educational, not yet available)
 
 Features may include:
 
-One timeline only.
+One timeline only. (subject to change like all things)
 
 Authenticate with different platforms to apply different message background colours (very important).
 
@@ -16,13 +16,13 @@ Authenticate with different platforms to apply different message background colo
 <img valign='middle' alt='green' src='https://readme-swatches.vercel.app/1DB954'/> Sign in with Spotify<br/>
 <img valign='middle' alt='grey' src='https://readme-swatches.vercel.app/8899A6'/> Preview Mode <sup style="color: red;">New</sup>
 
-Messages are ephemeral. After 100 seconds of chat inactivity, the entire chat history is wiped from storage. [Currently disabled for testing purposes]
+Delete a message.
 
-Delete your regrettable messages.
+All messages evaporate after 2 days of continuous inactivity.
 
-A stream of annoying notifications to entice you back to the app upon leaving. [Currently disabled because annoying]
+A replica of the Twitter heart animation (web version) to like messages. (non persistent)
 
-A replica of the Twitter heart animation (web version) to like messages. [Still testing]
+Fetch Twitter data from chat.
 
 <kbd>
 <img width="478" alt="Myco Screenshot" src="https://user-images.githubusercontent.com/4672139/202636618-30b7dcdb-4b76-4b2d-a295-28c6133b1595.png">
@@ -32,7 +32,6 @@ A replica of the Twitter heart animation (web version) to like messages. [Still 
 
 <p>Soon, maybe:</p>
 <ul>
-<li>Twitter things</li>
 <li>Instagram auth</li>
 <li>Bitcoin payments</li>
 <li>End-to-end encryption</li>
