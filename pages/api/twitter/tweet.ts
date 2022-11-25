@@ -29,10 +29,12 @@ export default async function handler(
       token?.userProfile?.twitterHandle!
     )
 
-    const likedTweets = await readOnlyClient.v2.userLikedTweets(user.data.id)
+    const userTweets = await readOnlyClient.v2.userTimeline(user.data.id, {
+      exclude: 'replies',
+    })
 
     return res.status(200).json({
-      ...likedTweets,
+      ...userTweets,
     })
   } catch (error: unknown) {
     res.status(500).send({ error })

@@ -36,8 +36,8 @@ function ChatInput() {
     // Type like to get your most recent like
     if (input === 'like') {
       setKeywordFetching(true)
-      const likedTweet = await fetch('/api/twitter/likes', {
-        method: 'POST',
+      const likedTweet = await fetch('/api/twitter/like', {
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -55,6 +55,34 @@ function ChatInput() {
       }, 300)
       if (likedTweet?._realData?.data[0]?.text) {
         setInput(likedTweet._realData.data[0].text)
+      } else {
+        setInput('')
+      }
+      return
+    }
+
+    // Type tweet to get your most recent tweet
+    if (input === 'tweet') {
+      setKeywordFetching(true)
+      const userTweets = await fetch('/api/twitter/tweet', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((res) => res.json())
+        .catch((e) => {
+          console.error(e)
+        })
+
+      if (userTweets) setTwitterSuccess(true)
+
+      setKeywordFetching(false)
+      setTimeout(function () {
+        inputRef?.current?.focus()
+      }, 300)
+      if (userTweets?._realData?.data[0]?.text) {
+        setInput(userTweets._realData.data[0].text)
       } else {
         setInput('')
       }
@@ -112,7 +140,7 @@ function ChatInput() {
         disabled={!session || keywordFetching}
         placeholder="What's happening?"
         onChange={(e) => setInput(e.target.value)}
-        className={`happening flex-1 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent px-5 py-3 disabled:opacity-50 diabled:cursor-not-allowed ${
+        className={`what-is-happening flex-1 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent px-5 py-3 disabled:opacity-50 diabled:cursor-not-allowed ${
           twitterSuccess && 'twitter-success'
         }`}
       ></input>

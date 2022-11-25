@@ -2,14 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-.happening {
+.what-is-happening {
   position: relative;
 }
 
 .twitter-success {
   background-color: #1da1f2;
   color: white;
-  transition: 0.4s linear all;
+  transition: 0.5s linear all;
 }
 
 .heart-beat {
