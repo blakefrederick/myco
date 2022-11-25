@@ -1,6 +1,6 @@
 'use client'
 
-import { FormEvent, useState, useRef, useEffect } from 'react'
+import { FormEvent, useState, useRef, KeyboardEvent } from 'react'
 import { v4 as uuid } from 'uuid'
 import { Message } from 'typings'
 import useSWR from 'swr'
@@ -25,7 +25,7 @@ function ChatInput() {
   // 2. If the value returned from fetch matches our optimistic guess, then great
   // 3. Otherwise, rollback
 
-  const handleChatKey = (e) => {
+  const handleChatKey = (e: KeyboardEvent<HTMLInputElement>) => {
     // After retrieving a tweet, only allow submit or delete
     if (twitterSuccess) {
       if (e.key === 'Backspace') {
