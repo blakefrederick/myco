@@ -1,15 +1,19 @@
 'use client'
 
-import { FormEvent, useState } from 'react'
+import { FormEvent, useState, useRef } from 'react'
 import { v4 as uuid } from 'uuid'
 import { Message } from 'typings'
 import useSWR from 'swr'
 import fetcher from 'utils/fetchMessages'
 import { useSession } from 'next-auth/react'
+import Image from 'next/image'
 
 function ChatInput() {
   const { data: session } = useSession()
   const [input, setInput] = useState('')
+  const [keywordFetching, setKeywordFetching] = useState(false)
+  const [twitterSuccess, setTwitterSuccess] = useState(false)
+  const inputRef = useRef<HTMLInputElement>(null)
   const { data: messages, error, mutate } = useSWR('/api/getMessages', fetcher)
 
   const service = session?.service || 'Anonymous'
@@ -26,21 +30,36 @@ function ChatInput() {
 
     if (!input || !session) return
 
+    const messageToSend = input
+    setInput(' ')
+
     // Type like to get your most recent like
     if (input === 'like') {
+      setKeywordFetching(true)
       const likedTweet = await fetch('/api/twitter/likes', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-      }).then((res) => res.json())
+      })
+        .then((res) => res.json())
+        .catch((e) => {
+          console.error(e)
+        })
 
-      setInput(likedTweet._realData.data[0].text)
+      if (likedTweet) setTwitterSuccess(true)
+
+      setKeywordFetching(false)
+      setTimeout(function () {
+        inputRef?.current?.focus()
+      }, 300)
+      if (likedTweet?._realData?.data[0]?.text) {
+        setInput(likedTweet._realData.data[0].text)
+      } else {
+        setInput('')
+      }
       return
     }
-
-    const messageToSend = input
-    setInput('')
 
     const id = uuid()
 
@@ -75,6 +94,9 @@ function ChatInput() {
       optimisticData: [message, ...messages!],
       rollbackOnError: true,
     })
+
+    setInput('')
+    setTwitterSuccess(false)
   }
 
   return (
@@ -85,11 +107,24 @@ function ChatInput() {
       <input
         type="input"
         value={input}
-        disabled={!session}
+        ref={inputRef}
+        autoFocus
+        disabled={!session || keywordFetching}
         placeholder="What's happening?"
         onChange={(e) => setInput(e.target.value)}
-        className="flex-1 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent px-5 py-3 disabled:opacity-50 diabled:cursor-not-allowed"
+        className={`happening flex-1 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent px-5 py-3 disabled:opacity-50 diabled:cursor-not-allowed ${
+          twitterSuccess && 'twitter-success'
+        }`}
       ></input>
+      {keywordFetching && (
+        <Image
+          className="heart-beat"
+          src="/images/heart-beat.gif"
+          alt="loading"
+          width="50"
+          height="50"
+        />
+      )}
       <button
         type="submit"
         disabled={!input}

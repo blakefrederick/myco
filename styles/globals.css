@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.happening {
+  position: relative;
+}
+
+.twitter-success {
+  background-color: #1da1f2;
+  color: white;
+  transition: 0.4s linear all;
+}
+
+.heart-beat {
+  position: absolute;
+  opacity: 0.5;
+  left: 45px;
+  top: 20px;
+}
