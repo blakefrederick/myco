@@ -73,7 +73,7 @@ function Header({ session }: Props) {
     )
 
   return (
-    <header className="top-0 z-50 bg-white justify-center items-center">
+    <header className="top-0 z-50 justify-center items-center">
       <div className="flex flex-col items-center space-y-5 mb-10">
         <div className="flex space-x-2 items center">
           <Link href="/">
@@ -92,7 +92,7 @@ function Header({ session }: Props) {
         >
           Sign In
         </Link>
-        <Link href="/preview" className="text-gray-300 text-sm underline">
+        <Link href="/preview" className="text-zinc-400 text-sm underline">
           or not
         </Link>
         {/* <Link href="/auth/signin?dev=true" className="text-gray-100 text-3xs">
