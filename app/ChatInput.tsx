@@ -16,8 +16,6 @@ function ChatInput() {
   const inputRef = useRef<HTMLInputElement>(null)
   const { data: messages, error, mutate } = useSWR('/api/getMessages', fetcher)
 
-  const service = session?.service || 'Anonymous'
-
   console.log('session ChatInput ', session)
 
   // Optimistic fetch data pattern:
@@ -114,8 +112,9 @@ function ChatInput() {
       profilePic: session?.user?.image!,
       email: session?.user?.email!,
       service:
-        typeof service === 'string'
-          ? service?.charAt(0)?.toUpperCase() + service?.slice(1)
+        typeof session?.service === 'string'
+          ? session?.service?.charAt(0)?.toUpperCase() +
+            session?.service?.slice(1)
           : 'Anonymous',
     }
 
@@ -141,43 +140,46 @@ function ChatInput() {
     setInput('')
     setTwitterSuccess(false)
   }
-
-  return (
-    <form
-      onSubmit={addMessage}
-      className="fixed bottom-0 z-50 w-full flex px-10 py-5 space-x-2 border-t bg-white border-gray-100"
-    >
-      <input
-        type="input"
-        value={input}
-        ref={inputRef}
-        autoFocus
-        disabled={!session || keywordFetching}
-        placeholder="What's happening?"
-        onChange={(e) => setInput(e.target.value)}
-        onKeyDown={(e) => handleChatKey(e)}
-        className={`what-is-happening flex-1 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent px-5 py-3 disabled:opacity-50 diabled:cursor-not-allowed ${
-          twitterSuccess && 'twitter-success'
-        }`}
-      ></input>
-      {keywordFetching && (
-        <Image
-          className="heart-beat"
-          src="/images/heart-beat.gif"
-          alt="loading"
-          width="50"
-          height="50"
-        />
-      )}
-      <button
-        type="submit"
-        disabled={!input}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+  if (typeof session?.service === 'string') {
+    return (
+      <form
+        onSubmit={addMessage}
+        className="fixed bottom-0 z-50 w-full flex px-10 py-5 space-x-2 border-t bg-white border-gray-100"
       >
-        Send
-      </button>
-    </form>
-  )
+        <input
+          type="input"
+          value={input}
+          ref={inputRef}
+          autoFocus
+          disabled={!session || keywordFetching}
+          placeholder="What's happening?"
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => handleChatKey(e)}
+          className={`what-is-happening flex-1 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent px-5 py-3 disabled:opacity-50 diabled:cursor-not-allowed ${
+            twitterSuccess && 'twitter-success'
+          }`}
+        ></input>
+        {keywordFetching && (
+          <Image
+            className="heart-beat"
+            src="/images/heart-beat.gif"
+            alt="loading"
+            width="50"
+            height="50"
+          />
+        )}
+        <button
+          type="submit"
+          disabled={!input}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Send
+        </button>
+      </form>
+    )
+  } else {
+    return <div></div>
+  }
 }
 
 export default ChatInput

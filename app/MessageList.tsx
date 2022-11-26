@@ -6,6 +6,7 @@ import useSWR from 'swr'
 import fetcher from 'utils/fetchMessages'
 import MessageComponent from './MessageComponent'
 import { clientPusher } from 'lib/pusher'
+import { useSession } from 'next-auth/react'
 
 function MessageList() {
   const {
@@ -13,6 +14,7 @@ function MessageList() {
     error,
     mutate,
   } = useSWR<Message[]>('/api/getMessages', fetcher)
+  const { data: session } = useSession()
 
   useEffect(() => {
     // Notifications - super annoying mode
@@ -71,13 +73,17 @@ function MessageList() {
     }
   }, [messages, mutate, clientPusher])
 
-  return (
-    <div className="space-y-5 px-5 pt-8 pb-32 max-w-2xl xl:max-w-4xl mx-auto">
-      {messages?.map((message) => (
-        <MessageComponent key={message.id} message={message} />
-      ))}
-    </div>
-  )
+  if (typeof session?.service === 'string') {
+    return (
+      <div className="space-y-5 px-5 pt-8 pb-32 max-w-2xl xl:max-w-4xl mx-auto">
+        {messages?.map((message) => (
+          <MessageComponent key={message.id} message={message} />
+        ))}
+      </div>
+    )
+  } else {
+    return <div></div>
+  }
 }
 
 export default MessageList
