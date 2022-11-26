@@ -94,9 +94,9 @@ function Header({ session }: Props) {
         <Link href="/preview" className="text-gray-300 text-sm underline">
           or not
         </Link>
-        <Link href="/auth/signin?dev=true" className="text-gray-100 text-3xs">
+        {/* <Link href="/auth/signin?dev=true" className="text-gray-100 text-3xs">
           secret developer link
-        </Link>
+        </Link> */}
       </div>
     </header>
   )
