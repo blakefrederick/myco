@@ -73,17 +73,13 @@ function MessageList() {
     }
   }, [messages, mutate, clientPusher])
 
-  if (typeof session?.service === 'string') {
-    return (
-      <div className="space-y-5 px-5 pt-8 pb-32 max-w-2xl xl:max-w-4xl mx-auto">
-        {messages?.map((message) => (
-          <MessageComponent key={message.id} message={message} />
-        ))}
-      </div>
-    )
-  } else {
-    return <div></div>
-  }
+  return (
+    <div className="space-y-5 px-5 pt-8 pb-32 bg-white max-w-2xl xl:max-w-4xl mx-auto">
+      {messages?.map((message) => (
+        <MessageComponent key={message.id} message={message} />
+      ))}
+    </div>
+  )
 }
 
 export default MessageList
