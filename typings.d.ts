@@ -6,4 +6,5 @@ export type Message = {
   profilePic: string
   email: string
   service: string
+  media: string
 }

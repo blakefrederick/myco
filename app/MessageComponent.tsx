@@ -54,6 +54,15 @@ function MessageComponent({ message }: Props) {
             } ${isSpotify && 'bg-Spotify'} ${isInstagram && 'bg-Instagram'}`}
           >
             <p>{message.message}</p>
+            {message?.media && (
+              <Image
+                className={`rounded-sm py-2 ${isUser && 'ml-auto'}`}
+                src={message?.media}
+                alt="media"
+                height="200"
+                width="150"
+              />
+            )}
           </div>
           <Heart owner={isUser ? 'mine' : 'theirs'} />
         </div>

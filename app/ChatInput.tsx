@@ -11,12 +11,13 @@ import Image from 'next/image'
 function ChatInput() {
   const { data: session } = useSession()
   const [input, setInput] = useState('')
+  const [media, setMedia] = useState('')
   const [keywordFetching, setKeywordFetching] = useState(false)
   const [twitterSuccess, setTwitterSuccess] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const { data: messages, error, mutate } = useSWR('/api/getMessages', fetcher)
 
-  console.log('session ChatInput ', session)
+  // console.log('session ChatInput ', session)
 
   // Optimistic fetch data pattern:
   // 1. Update immediately in the client, assuming the fetch request will succeed
@@ -28,6 +29,7 @@ function ChatInput() {
     if (twitterSuccess) {
       if (e.key === 'Backspace') {
         setInput('')
+        setMedia('')
         setTwitterSuccess(false)
       } else if (e.key === 'Enter') {
         // be silent
@@ -45,6 +47,7 @@ function ChatInput() {
 
     const messageToSend = input
     setInput(' ')
+    setMedia('')
 
     // Type like to get your most recent like
     if (input === 'like') {
@@ -67,9 +70,13 @@ function ChatInput() {
         inputRef?.current?.focus()
       }, 300)
       if (likedTweet?._realData?.data[0]?.text) {
+        console.log('tweet', likedTweet._realData)
         setInput(likedTweet._realData.data[0].text)
       } else {
         setInput('')
+      }
+      if (likedTweet?._realData?.includes?.media[0]?.url) {
+        setMedia(likedTweet?._realData?.includes?.media[0]?.url)
       }
       return
     }
@@ -95,9 +102,13 @@ function ChatInput() {
         inputRef?.current?.focus()
       }, 300)
       if (userTweets?._realData?.data[0]?.text) {
+        console.log('tweet', userTweets._realData)
         setInput(userTweets._realData.data[0].text)
       } else {
         setInput('')
+      }
+      if (userTweets?._realData?.includes?.media[0]?.url) {
+        setMedia(userTweets?._realData?.includes?.media[0]?.url)
       }
       return
     }
@@ -116,6 +127,7 @@ function ChatInput() {
           ? session?.service?.charAt(0)?.toUpperCase() +
             session?.service?.slice(1)
           : 'Anonymous',
+      media: media,
     }
 
     const uploadMessageToUpstash = async () => {
@@ -138,6 +150,7 @@ function ChatInput() {
     })
 
     setInput('')
+    setMedia('')
     setTwitterSuccess(false)
   }
   if (typeof session?.service === 'string') {
