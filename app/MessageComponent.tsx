@@ -64,7 +64,9 @@ function MessageComponent({ message }: Props) {
               />
             )}
           </div>
-          <Heart owner={isUser ? 'mine' : 'theirs'} />
+          <div className={`${isUser ? 'ml-2' : 'mr-2'}`}>
+            <Heart owner={isUser ? 'mine' : 'theirs'} />
+          </div>
         </div>
         <p
           className={`text-2xs px-[1px] pb-[1px] ${isUser && 'text-right'} ${
