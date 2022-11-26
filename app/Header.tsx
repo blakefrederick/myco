@@ -18,6 +18,7 @@ function Header({ session }: Props) {
   const service = getCookie('service')
   const isSpotify = service === 'spotify'
   const isFacebook = session?.user?.image?.includes('fbsbx') && !isSpotify
+  const isInstagram = service === 'instagram'
 
   if (pathname?.split('/')[1] === 'preview')
     return (
@@ -33,7 +34,7 @@ function Header({ session }: Props) {
           <div>
             <p className="text-blue-400">Not logged in</p>
             <p className="font-bold text-lg">Anonymous</p>
-            <p className={`text-2xs px-[1px] pb-[1px]`}>That's okay!</p>
+            <p className={`text-2xs px-[1px] pb-[1px]`}>Can't send messages!</p>
           </div>
         </div>
       </header>
@@ -58,12 +59,12 @@ function Header({ session }: Props) {
                 isFacebook && 'text-Facebook'
               } ${isGithub && 'text-GitHub'} ${isTwitter && 'text-Twitter'} ${
                 isSpotify && 'text-Spotify'
-              }`}
+              } ${isInstagram && 'text-Instagram'}`}
             >
               {isFacebook && 'Signed in with Facebook'}
               {isGithub && 'Signed in with Github'}
               {isTwitter && 'Signed in with Twitter'}
-              {isSpotify && 'Signed in with Spotify'}
+              {isInstagram && 'Signed in with Instagram'}
             </p>
           </div>
         </div>

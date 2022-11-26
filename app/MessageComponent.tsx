@@ -19,6 +19,7 @@ function MessageComponent({ message }: Props) {
   const isFacebook = message.service === 'Facebook'
   const isTwitter = message.service === 'Twitter'
   const isSpotify = message.service === 'Spotify'
+  const isInstagram = message.service === 'Instagram'
 
   // console.log('session MessageComponent ', session)
 
@@ -38,7 +39,9 @@ function MessageComponent({ message }: Props) {
           className={`text-2xs px-[2px] pb-[2px] ${isUser && 'text-right'} ${
             isFacebook && 'text-Facebook'
           } ${isGithub && 'text-GitHub'}
-          ${isTwitter && 'text-Twitter'} ${isSpotify && 'text-Spotify'}`}
+          ${isTwitter && 'text-Twitter'} ${isSpotify && 'text-Spotify'} ${
+            isInstagram && 'text-Instagram'
+          }`}
         >
           {message.username}
         </p>
@@ -48,7 +51,7 @@ function MessageComponent({ message }: Props) {
               isUser && 'text-right order-2'
             } ${isFacebook && 'bg-Facebook'} ${isGithub && 'bg-GitHub'} ${
               isTwitter && 'bg-Twitter'
-            } ${isSpotify && 'bg-Spotify'}`}
+            } ${isSpotify && 'bg-Spotify'} ${isInstagram && 'bg-Instagram'}`}
           >
             <p>{message.message}</p>
           </div>
@@ -59,7 +62,7 @@ function MessageComponent({ message }: Props) {
             isFacebook && 'text-Facebook'
           } ${isGithub && 'text-GitHub'} ${isTwitter && 'text-Twitter'} ${
             isSpotify && 'text-Spotify'
-          }`}
+          } ${isInstagram && 'text-Instagram'}`}
         >
           Message sent via {message.service}
         </p>
@@ -75,7 +78,7 @@ function MessageComponent({ message }: Props) {
             isFacebook && 'text-Facebook'
           } ${isGithub && 'text-GitHub'} ${isTwitter && 'text-Twitter'} ${
             isSpotify && 'text-Spotify'
-          }`}
+          } ${isInstagram && 'text-Instagram'}`}
         >
           {isUser && <DeleteButton session={session} message={message} />}
         </p>

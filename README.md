@@ -14,7 +14,8 @@ Authenticate with different platforms to apply different message background colo
 <img valign='middle' alt='light blue' src='https://readme-swatches.vercel.app/1DA1F2'/> Sign in with Twitter<br/>
 <img valign='middle' alt='black' src='https://readme-swatches.vercel.app/171515'/> Sign in with Github<br/>
 <img valign='middle' alt='green' src='https://readme-swatches.vercel.app/1DB954'/> Sign in with Spotify<br/>
-<img valign='middle' alt='grey' src='https://readme-swatches.vercel.app/8899A6'/> Preview Mode <sup style="color: red;">New</sup>
+<img valign='middle' alt='green' src='https://readme-swatches.vercel.app/E1306C'/> Sign in with Instagram <sup style="color: red;">New</sup><br/>
+<img valign='middle' alt='grey' src='https://readme-swatches.vercel.app/8899A6'/> Preview Mode
 
 Delete a message.
 
@@ -32,7 +33,6 @@ Fetch Twitter data from chat.
 
 <p>Soon, maybe:</p>
 <ul>
-<li>Instagram auth</li>
 <li>Bitcoin payments</li>
 <li>End-to-end encryption</li>
 </ul>

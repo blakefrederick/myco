@@ -24,8 +24,8 @@ function SignInComponent({ providers, dev }: Props) {
             (provider.name === 'Twitter' ||
               provider.name === 'Twitter (Legacy)') &&
             'bg-Twitter'
-          } ${
-              provider.name === 'Spotify' && 'bg-Spotify'
+          } ${provider.name === 'Spotify' && 'bg-Spotify'} ${
+              provider.name === 'Instagram' && 'bg-Instagram'
             }  text-white font-bold my-4 py-2 px-4 rounded`}
             onClick={() =>
               signIn(provider.id, {
