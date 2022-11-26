@@ -29,7 +29,34 @@ export default async function handler(
       token?.userProfile?.twitterHandle!
     )
 
-    const likedTweets = await readOnlyClient.v2.userLikedTweets(user.data.id)
+    const likedTweets = await readOnlyClient.v2.userLikedTweets(user.data.id, {
+      max_results: 10, 
+      expansions: [
+        'author_id',
+        'referenced_tweets.id',
+        'referenced_tweets.id.author_id',
+        'entities.mentions.username',
+        'attachments.poll_ids',
+        'attachments.media_keys',
+        'in_reply_to_user_id',
+        'geo.place_id',
+        'edit_history_tweet_ids',
+      ],
+      'media.fields': [
+        'duration_ms',
+        'height',
+        'media_key',
+        'preview_image_url',
+        'type',
+        'url',
+        'width',
+        'public_metrics',
+        'non_public_metrics',
+        'organic_metrics',
+        'alt_text',
+        'variants',
+      ],
+    })
 
     return res.status(200).json({
       ...likedTweets,
