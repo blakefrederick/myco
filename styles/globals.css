@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  background: rgb(232, 227, 217);
+}
+
+body {
+  padding-bottom: 30px;
+}
+
 .what-is-happening {
   position: relative;
 }

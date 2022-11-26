@@ -30,7 +30,7 @@ export default async function handler(
     )
 
     const likedTweets = await readOnlyClient.v2.userLikedTweets(user.data.id, {
-      max_results: 10, 
+      max_results: 10,
       expansions: [
         'author_id',
         'referenced_tweets.id',
