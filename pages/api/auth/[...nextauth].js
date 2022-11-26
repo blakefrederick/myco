@@ -3,6 +3,7 @@ import FacebookProvider from 'next-auth/providers/facebook'
 import GitHubProvider from 'next-auth/providers/github'
 import TwitterProvider from 'next-auth/providers/twitter'
 import SpotifyProvider from 'next-auth/providers/spotify'
+import InstagramProvider from 'next-auth/providers/instagram'
 // import { cloneDeep } from 'tailwindcss/lib/util/cloneDeep'
 // import { setCookie } from 'cookies-next'
 
@@ -29,6 +30,10 @@ export const authOptions = {
     SpotifyProvider({
       clientId: process.env.SPOTIFY_CLIENT_ID,
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+    }),
+    InstagramProvider({
+      clientId: process.env.INSTAGRAM_CLIENT_ID,
+      clientSecret: process.env.INSTAGRAM_CLIENT_SECRET,
     }),
   ],
   callbacks: {
