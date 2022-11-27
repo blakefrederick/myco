@@ -24,7 +24,7 @@ All messages evaporate after 2 days of continuous inactivity.
 A replica of the Twitter heart animation (web version) to like messages. (non persistent)
 
 <kbd>
-<img width="478" alt="Myco Screenshot" src="https://user-images.githubusercontent.com/4672139/202636618-30b7dcdb-4b76-4b2d-a295-28c6133b1595.png">
+<img width="478" alt="Myco Screenshot" src="https://user-images.githubusercontent.com/4672139/204114211-6240ba1c-2fa3-4f1a-94e1-125c17c93147.png">
 </kbd>
 <br/>
 <br/>
@@ -32,6 +32,7 @@ A replica of the Twitter heart animation (web version) to like messages. (non pe
 Fetch Twitter data from chat:
 
 <img width="490" alt="Twitter Fetch" src="https://user-images.githubusercontent.com/4672139/203924274-5bc16b32-686d-4d50-9b98-d9bd58991cdc.gif">
+
 
 <p>Soon, maybe:</p>
 <ul>
