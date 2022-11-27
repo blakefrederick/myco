@@ -196,6 +196,7 @@ function ChatInput() {
     setMedia('')
     setTwitterSuccess(false)
     setInstagramSuccess(false)
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }
   if (typeof session?.service === 'string') {
     return (
