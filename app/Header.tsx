@@ -3,22 +3,17 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import LogoutButton from './LogoutButton'
-import { unstable_getServerSession } from 'next-auth'
 import { usePathname } from 'next/navigation'
-import { getCookie } from 'cookies-next'
+import { useSession } from 'next-auth/react'
 
-type Props = {
-  session: Awaited<ReturnType<typeof unstable_getServerSession>>
-}
-
-function Header({ session }: Props) {
-  const isGithub = session?.user?.image?.includes('github')
-  const isTwitter = session?.user?.image?.includes('twimg')
+function Header() {
+  const { data: session } = useSession()
+  const isGithub = session?.service === 'github'
+  const isTwitter = session?.service === 'twitter'
+  const isSpotify = session?.service === 'spotify'
+  const isFacebook = session?.service === 'facebook'
+  const isInstagram = session?.service === 'instagram'
   const pathname = usePathname()
-  const service = getCookie('service')
-  const isSpotify = service === 'spotify'
-  const isFacebook = session?.user?.image?.includes('fbsbx') && !isSpotify
-  const isInstagram = service === 'instagram'
 
   if (pathname?.split('/')[1] === 'preview')
     return (
