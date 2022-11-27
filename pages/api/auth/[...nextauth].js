@@ -34,28 +34,34 @@ export const authOptions = {
     InstagramProvider({
       clientId: process.env.INSTAGRAM_CLIENT_ID,
       clientSecret: process.env.INSTAGRAM_CLIENT_SECRET,
+      authorization: {
+        params: {
+          scope: 'user_profile,user_media',
+        },
+      },
     }),
   ],
   callbacks: {
     async jwt({ token, user, account, profile }) {
-      // console.log('profile', profile)
-      // console.log('token', token)
-      // console.log('account', account)
-      // console.log('user', user)
-      if (profile) {
+      console.log('profile', profile)
+      console.log('token', token)
+      console.log('account', account)
+      console.log('user', user)
+
+      if (profile || account) {
         token['userProfile'] = {
           service: account?.provider,
-          followersCount: profile.followers_count,
-          twitterHandle: profile.screen_name,
-          followingCount: profile.friends_count,
-          userID: profile.id,
+          followersCount: profile?.followers_count,
+          twitterHandle: profile?.screen_name,
+          followingCount: profile?.friends_count,
+          userID: profile?.id || account?.user_id,
         }
       }
       if (account) {
-        // setCookie('service', account?.provider, { req, res })
         token['credentials'] = {
-          authToken: account.oauth_token,
-          authSecret: account.oauth_token_secret,
+          authToken: account?.oauth_token,
+          authSecret: account?.oauth_token_secret,
+          accessToken: account?.access_token,
         }
       }
       return token

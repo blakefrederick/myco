@@ -26,13 +26,15 @@ function MessageComponent({ message }: Props) {
   return (
     <div className={`flex w-fit ${isUser && 'ml-auto'}`}>
       <div className={`flex-shrink-0 ${isUser && 'order-2'}`}>
-        <Image
-          className="rounded-full mx-2"
-          height={50}
-          width={50}
-          src={message.profilePic}
-          alt="Profile Picture"
-        />
+        {message.profilePic && (
+          <Image
+            className="rounded-full mx-2"
+            height={50}
+            width={50}
+            src={message.profilePic}
+            alt="Profile Picture"
+          />
+        )}
       </div>
       <div>
         <p

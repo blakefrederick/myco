@@ -22,7 +22,7 @@ function Header({ session }: Props) {
 
   if (pathname?.split('/')[1] === 'preview')
     return (
-      <header className="sticky top-0 z-50 p-10 bg-white flex justify-between items-center">
+      <header className="sticky top-0 z-50 p-10 bg-white flex justify-between items-center max-w-2xl xl:max-w-4xl mx-auto">
         <div className="flex space-x-2">
           <Image
             className="rounded-full mx-2 object-contain"
@@ -42,15 +42,17 @@ function Header({ session }: Props) {
 
   if (session)
     return (
-      <header className="sticky top-0 z-50 p-10 bg-white flex justify-between items-center">
+      <header className="sticky top-0 z-50 p-10 bg-white flex justify-between items-center max-w-2xl xl:max-w-4xl mx-auto">
         <div className="flex space-x-2">
-          <Image
-            className="rounded-full mx-2 object-contain"
-            src={session.user?.image!}
-            alt="Profile Picture"
-            height="65"
-            width="65"
-          />
+          {session.user?.image && (
+            <Image
+              className="rounded-full mx-2 object-contain"
+              src={session.user?.image!}
+              alt="Profile Picture"
+              height="65"
+              width="65"
+            />
+          )}
           <div>
             <p className="text-blue-400">Logged in as:</p>
             <p className="font-bold text-lg">{session.user?.name}</p>
