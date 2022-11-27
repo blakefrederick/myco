@@ -14,6 +14,7 @@ function ChatInput() {
   const [media, setMedia] = useState('')
   const [keywordFetching, setKeywordFetching] = useState(false)
   const [twitterSuccess, setTwitterSuccess] = useState(false)
+  const [instagramSuccess, setInstagramSuccess] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
   const { data: messages, error, mutate } = useSWR('/api/getMessages', fetcher)
 
@@ -26,11 +27,12 @@ function ChatInput() {
 
   const handleChatKey = (e: KeyboardEvent<HTMLInputElement>) => {
     // After retrieving a tweet, only allow submit or delete
-    if (twitterSuccess) {
+    if (twitterSuccess || instagramSuccess) {
       if (e.key === 'Backspace') {
         setInput('')
         setMedia('')
         setTwitterSuccess(false)
+        setInstagramSuccess(false)
       } else if (e.key === 'Enter') {
         // be silent
       } else {
@@ -49,68 +51,109 @@ function ChatInput() {
     setInput(' ')
     setMedia('')
 
-    // Type like to get your most recent like
-    if (input === 'like') {
-      setKeywordFetching(true)
-      const likedTweet = await fetch('/api/twitter/like', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then((res) => res.json())
-        .catch((e) => {
-          console.error(e)
+    // TODO move the following verbose section somewhere else
+
+    if (session?.service === 'twitter') {
+      // Type like to get your most recent like
+      if (input === 'like') {
+        setKeywordFetching(true)
+        const likedTweet = await fetch('/api/twitter/like', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
         })
+          .then((res) => res.json())
+          .catch((e) => {
+            console.error(e)
+          })
 
-      if (likedTweet) setTwitterSuccess(true)
+        if (likedTweet) setTwitterSuccess(true)
 
-      setKeywordFetching(false)
-      setTimeout(function () {
-        inputRef?.current?.focus()
-      }, 300)
-      if (likedTweet?._realData?.data[0]?.text) {
-        console.log('tweet', likedTweet._realData)
-        setInput(likedTweet._realData.data[0].text)
-      } else {
-        setInput('')
+        setKeywordFetching(false)
+        setTimeout(function () {
+          inputRef?.current?.focus()
+        }, 300)
+        if (likedTweet?._realData?.data[0]?.text) {
+          console.log('tweet', likedTweet._realData)
+          setInput(likedTweet._realData.data[0].text)
+        } else {
+          setInput('')
+        }
+        if (likedTweet?._realData?.includes?.media[0]?.url) {
+          setMedia(likedTweet?._realData?.includes?.media[0]?.url)
+        }
+        return
       }
-      if (likedTweet?._realData?.includes?.media[0]?.url) {
-        setMedia(likedTweet?._realData?.includes?.media[0]?.url)
+
+      // Type tweet to get your most recent tweet
+      if (input === 'tweet') {
+        setKeywordFetching(true)
+        const userTweets = await fetch('/api/twitter/tweet', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((res) => res.json())
+          .catch((e) => {
+            console.error(e)
+          })
+
+        if (userTweets) setTwitterSuccess(true)
+
+        setKeywordFetching(false)
+        setTimeout(function () {
+          inputRef?.current?.focus()
+        }, 300)
+        if (userTweets?._realData?.data[0]?.text) {
+          console.log('tweet', userTweets._realData)
+          setInput(userTweets._realData.data[0].text)
+        } else {
+          setInput('')
+        }
+        if (userTweets?._realData?.includes?.media[0]?.url) {
+          setMedia(userTweets?._realData?.includes?.media[0]?.url)
+        }
+        return
       }
-      return
     }
 
     // Type tweet to get your most recent tweet
-    if (input === 'tweet') {
-      setKeywordFetching(true)
-      const userTweets = await fetch('/api/twitter/tweet', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then((res) => res.json())
-        .catch((e) => {
-          console.error(e)
+    if (session?.service === 'instagram') {
+      if (input === 'caption') {
+        setKeywordFetching(true)
+        const instagramProfile = await fetch('/api/instagram/profile', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
         })
+          .then((res) => res.json())
+          .catch((e) => {
+            console.error(e)
+          })
 
-      if (userTweets) setTwitterSuccess(true)
+        if (instagramProfile) setInstagramSuccess(true)
 
-      setKeywordFetching(false)
-      setTimeout(function () {
-        inputRef?.current?.focus()
-      }, 300)
-      if (userTweets?._realData?.data[0]?.text) {
-        console.log('tweet', userTweets._realData)
-        setInput(userTweets._realData.data[0].text)
-      } else {
-        setInput('')
+        setKeywordFetching(false)
+        setTimeout(function () {
+          inputRef?.current?.focus()
+        }, 300)
+
+        console.log(instagramProfile)
+        // TODO this is just a caption. Use .id and some not yet existent endpoint to retrieve photo
+        if (instagramProfile?.profileData?.data[0]?.caption) {
+          console.log(
+            'instagram caption',
+            instagramProfile?.profileData?.data[0]?.caption
+          )
+          setInput(instagramProfile?.profileData?.data[0]?.caption)
+        } else {
+          setInput('')
+        }
+        return
       }
-      if (userTweets?._realData?.includes?.media[0]?.url) {
-        setMedia(userTweets?._realData?.includes?.media[0]?.url)
-      }
-      return
     }
 
     const id = uuid()
@@ -152,6 +195,7 @@ function ChatInput() {
     setInput('')
     setMedia('')
     setTwitterSuccess(false)
+    setInstagramSuccess(false)
   }
   if (typeof session?.service === 'string') {
     return (
@@ -170,7 +214,7 @@ function ChatInput() {
           onKeyDown={(e) => handleChatKey(e)}
           className={`what-is-happening flex-1 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent px-5 py-3 disabled:opacity-50 diabled:cursor-not-allowed ${
             twitterSuccess && 'twitter-success'
-          }`}
+          } ${instagramSuccess && 'instagram-success'}`}
         ></input>
         {keywordFetching && (
           <Image
