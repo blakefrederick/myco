@@ -23,6 +23,7 @@ declare module 'next-auth/jwt' {
     credentials: {
       authToken: string
       authSecret: string
+      accessToken: string
     }
     userProfile: {
       userID: string
