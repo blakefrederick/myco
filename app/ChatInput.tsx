@@ -54,8 +54,16 @@ function ChatInput() {
     // TODO move the following verbose section somewhere else
 
     if (session?.service === 'twitter') {
-      // Type like to get your most recent like
-      if (input === 'like') {
+      const likeRegex = /^like\s*(\d)?$/
+
+      const match = input.match(likeRegex)
+
+      if (match) {
+        // "like 3" corresponds to the 3rd most recent like, for example
+        const num =
+          Number(match[1]) >= 1 && Number(match[1]) <= 9
+            ? Number(match[1]) - 1
+            : 0
         setKeywordFetching(true)
         const likedTweet = await fetch('/api/twitter/like', {
           method: 'GET',
@@ -74,14 +82,14 @@ function ChatInput() {
         setTimeout(function () {
           inputRef?.current?.focus()
         }, 300)
-        if (likedTweet?._realData?.data[0]?.text) {
+        if (likedTweet?._realData?.data[num]?.text) {
           console.log('tweet', likedTweet._realData)
-          setInput(likedTweet._realData.data[0].text)
+          setInput(likedTweet._realData.data[num].text)
         } else {
           setInput('')
         }
-        if (likedTweet?._realData?.includes?.media[0]?.url) {
-          setMedia(likedTweet?._realData?.includes?.media[0]?.url)
+        if (likedTweet?._realData?.data[num]?.url) {
+          setMedia(likedTweet?._realData?.data[num]?.url)
         }
         return
       }

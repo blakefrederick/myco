@@ -16,7 +16,7 @@ export default async function handler(
     secret: process.env.NEXTAUTH_SECRET,
   })
 
-  console.log('token', token)
+  // console.log('token', token)
 
   try {
     // Instantiate with desired auth type (here's Bearer v2 auth)
@@ -58,10 +58,23 @@ export default async function handler(
       ],
     })
 
+    likedTweets.data.data.forEach((item, index) => {
+      if (item.attachments && item.attachments.media_keys) {
+        const mediaKey = item.attachments.media_keys[0]
+        const mediaItem = likedTweets.includes.media.find(
+          (media) => media.media_key === mediaKey
+        )
+        if (mediaItem) {
+          likedTweets.data.data[index].url = mediaItem.url
+        }
+      }
+    })
+
     return res.status(200).json({
       ...likedTweets,
     })
   } catch (error: unknown) {
+    console.error(error)
     res.status(500).send({ error })
   }
 }
