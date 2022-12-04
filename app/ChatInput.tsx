@@ -65,7 +65,7 @@ function ChatInput() {
             ? Number(match[1]) - 1
             : 0
         setKeywordFetching(true)
-        const likedTweet = await fetch('/api/twitter/like', {
+        const likedTweets = await fetch('/api/twitter/like', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -76,21 +76,33 @@ function ChatInput() {
             console.error(e)
           })
 
-        if (likedTweet) setTwitterSuccess(true)
+        if (likedTweets) setTwitterSuccess(true)
 
         setKeywordFetching(false)
         setTimeout(function () {
           inputRef?.current?.focus()
         }, 300)
-        if (likedTweet?._realData?.data[num]?.text) {
-          console.log('tweet', likedTweet._realData)
-          setInput(likedTweet._realData.data[num].text)
+
+        // Tweet text
+        if (likedTweets?._realData?.data[num]?.text) {
+          setInput(likedTweets._realData.data[num].text)
         } else {
           setInput('')
         }
-        if (likedTweet?._realData?.data[num]?.url) {
-          setMedia(likedTweet?._realData?.data[num]?.url)
-        }
+
+        // Tweet media (just images atm)
+        const mediaKey =
+          likedTweets?._realData.data[num].attachments.media_keys[0] // todo get all keys not just the 0th
+        likedTweets?._realData?.includes.media.forEach(
+          (item: any, index: number) => {
+            console.log(item.media_key)
+            if (item.media_key === mediaKey) {
+              setMedia(item.url)
+              console.log('great')
+            }
+          }
+        )
+
         return
       }
 

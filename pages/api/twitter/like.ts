@@ -58,18 +58,6 @@ export default async function handler(
       ],
     })
 
-    likedTweets.data.data.forEach((item, index) => {
-      if (item.attachments && item.attachments.media_keys) {
-        const mediaKey = item.attachments.media_keys[0]
-        const mediaItem = likedTweets.includes.media.find(
-          (media) => media.media_key === mediaKey
-        )
-        if (mediaItem) {
-          likedTweets.data.data[index].url = mediaItem.url
-        }
-      }
-    })
-
     return res.status(200).json({
       ...likedTweets,
     })
