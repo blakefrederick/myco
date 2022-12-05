@@ -10,7 +10,7 @@ async function HomePage() {
     <main>
       {session && <MessageList />}
       {session && <ChatInput />}
-      <h1 className="text-center">🎔</h1>
+      <h1 className="text-center">&#9825;</h1>
     </main>
   )
 }
