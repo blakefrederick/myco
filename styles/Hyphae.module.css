@@ -1,0 +1,33 @@
+.substratum {
+  z-index: -99;
+}
+
+.status {
+  font-family: monospace;
+  font-size: '6px';
+  color: grey;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+  transform: scale(1);
+  animation: breathe 2s infinite;
+}
+
+@keyframes breathe {
+  0% {
+    transform: scale(0.95);
+    color: grey;
+  }
+
+  70% {
+    transform: scale(1);
+    color: white;
+  }
+
+  100% {
+    transform: scale(0.95);
+    color: grey;
+  }
+}

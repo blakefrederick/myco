@@ -35,6 +35,9 @@ function Header() {
       </header>
     )
 
+  if (pathname?.split('/')[1] === 'about')
+    return <header className="mx-auto"></header>
+
   if (session)
     return (
       <header className="sticky top-0 z-50 p-10 bg-white flex justify-between items-center max-w-2xl xl:max-w-4xl mx-auto">
