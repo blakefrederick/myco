@@ -135,12 +135,12 @@ export function littleBang(canvas) {
         // Stop growing if we bump into another hypha
         for (let j = 0; j < hyphae.length; j++) {
           let my = hyphae[j]
-          // Let a hypha into myself
-          if (i !== j) {
-            if (my.visited.includes(Math.floor(m.x) + ',' + Math.floor(m.y))) {
-              m.growing = false
-            }
-          }
+          // Let a hypha bump into anyone
+          // if (i !== j) {
+          //   if (my.visited.includes(Math.floor(m.x) + ',' + Math.floor(m.y))) {
+          //     m.growing = false
+          //   }
+          // }
         }
       }
       // Modifies growth rate
