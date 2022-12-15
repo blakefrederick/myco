@@ -1,6 +1,7 @@
 import MessageList from './MessageList'
 import ChatInput from './ChatInput'
 import { unstable_getServerSession } from 'next-auth/next'
+import HeartOutline from './HeartOutline'
 
 async function HomePage() {
   // Doesn't contain my customer session vars so using useSession in ChatInput, MessageList instead of passing as prop
@@ -10,7 +11,7 @@ async function HomePage() {
     <main>
       {session && <MessageList />}
       {session && <ChatInput />}
-      <h1 className="text-center">&#9825;</h1>
+      <HeartOutline />
     </main>
   )
 }

@@ -1,18 +1,13 @@
-'use client'
-
-import { Providers } from '../providers'
-import MessageList from '../MessageList'
-import { useRouter } from 'next/navigation'
+import { Providers } from 'app/providers'
+import MessageList from 'app/MessageList'
+import HeartOutline from 'app/HeartOutline'
 
 function PreviewPage() {
-  const router = useRouter()
   return (
     <Providers session={''}>
       <main>
         <MessageList />
-        <h1 className="text-center" onClick={() => router.push('/about')}>
-          &#9825;
-        </h1>
+        <HeartOutline />
       </main>
     </Providers>
   )
