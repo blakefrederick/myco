@@ -18,7 +18,7 @@ export function littleBang(canvas) {
       this.x = x
       this.y = y
       this.id = 0
-      this.diameter = 1
+      this.diameter = 0.1
       this.growing = true
       this.direction = { x: 0, y: 0 }
       this.length = 0
