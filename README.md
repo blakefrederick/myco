@@ -33,6 +33,8 @@ Fetch Twitter data from chat:
 
 <img width="490" alt="Twitter Fetch" src="https://user-images.githubusercontent.com/4672139/203924274-5bc16b32-686d-4d50-9b98-d9bd58991cdc.gif">
 
+Fetch Instagram data too.
+
 <p>Likely:</p>
 <ul>
 <li>Content attribution</li>
