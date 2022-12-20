@@ -150,7 +150,6 @@ function ChatInput() {
               console.log(item.media_key)
               if (item.media_key === mediaKey) {
                 setMedia(item.url)
-                console.log('great')
               }
             }
           )
@@ -163,7 +162,7 @@ function ChatInput() {
     if (session?.service === 'instagram') {
       if (input === 'caption') {
         setKeywordFetching(true)
-        const instagramProfile = await fetch('/api/instagram/profile', {
+        const instagramProfile = await fetch('/api/instagram/caption', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -189,6 +188,40 @@ function ChatInput() {
             instagramProfile?.profileData?.data[0]?.caption
           )
           setInput(instagramProfile?.profileData?.data[0]?.caption)
+        } else {
+          setInput('')
+        }
+        return
+      }
+      if (input === 'photo') {
+        setKeywordFetching(true)
+        const instagramProfile = await fetch('/api/instagram/photo', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((res) => res.json())
+          .catch((e) => {
+            console.error(e)
+          })
+
+        if (instagramProfile) setInstagramSuccess(true)
+
+        setKeywordFetching(false)
+        setTimeout(function () {
+          inputRef?.current?.focus()
+        }, 300)
+
+        console.log(instagramProfile)
+        // Gets latest IG photo
+        if (instagramProfile?.profileData?.data[0]?.media_url) {
+          console.log(
+            'instagram media_url',
+            instagramProfile?.profileData?.data[0]?.media_url
+          )
+          setMedia(instagramProfile?.profileData?.data[0]?.media_url)
+          setInput('📷')
         } else {
           setInput('')
         }

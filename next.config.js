@@ -14,6 +14,7 @@ module.exports = {
       'pbs.twimg.com',
       'imagizer.imageshack.com',
       'i.imgur.com',
+      'scontent.cdninstagram.com',
     ],
   },
 }
