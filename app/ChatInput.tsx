@@ -51,18 +51,18 @@ function ChatInput() {
     setInput(' ')
     setMedia('')
 
-    // TODO move the following verbose section somewhere else
+    // TODO move the following verbose section somewhere else and refactor!
 
     if (session?.service === 'twitter') {
+      // Command "like X" gets your most recent tweet (includes retweets)
       const likeRegex = /^like\s*(\d)?$/
+      const likeMatch = input.match(likeRegex)
 
-      const match = input.match(likeRegex)
-
-      if (match) {
+      if (likeMatch) {
         // "like 3" corresponds to the 3rd most recent like, for example
         const num =
-          Number(match[1]) >= 1 && Number(match[1]) <= 9
-            ? Number(match[1]) - 1
+          Number(likeMatch[1]) >= 1 && Number(likeMatch[1]) <= 9
+            ? Number(likeMatch[1]) - 1
             : 0
         setKeywordFetching(true)
         const likedTweets = await fetch('/api/twitter/like', {
@@ -98,7 +98,6 @@ function ChatInput() {
             console.log(item.media_key)
             if (item.media_key === mediaKey) {
               setMedia(item.url)
-              console.log('great')
             }
           }
         )
@@ -106,55 +105,53 @@ function ChatInput() {
         return
       }
 
-      // Type tweet to get your most recent tweet
-      if (input === 'tweet') {
-        const tweetRegex = /^tweet\s*(\d)?$/
+      // Command "tweet X" gets your most recent tweet (includes retweets)
+      const tweetRegex = /^tweet\s*(\d)?$/
 
-        const match = input.match(tweetRegex)
+      const tweetMatch = input.match(tweetRegex)
 
-        if (match) {
-          // "like 3" corresponds to the 3rd most recent like, for example
-          const num =
-            Number(match[1]) >= 1 && Number(match[1]) <= 9
-              ? Number(match[1]) - 1
-              : 0
-          setKeywordFetching(true)
-          const userTweets = await fetch('/api/twitter/tweet', {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
+      if (tweetMatch) {
+        // "tweet 3" corresponds to the 3rd most recent tweet, for example
+        const num =
+          Number(tweetMatch[1]) >= 1 && Number(tweetMatch[1]) <= 9
+            ? Number(tweetMatch[1]) - 1
+            : 0
+        setKeywordFetching(true)
+        const userTweets = await fetch('/api/twitter/tweet', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((res) => res.json())
+          .catch((e) => {
+            console.error(e)
           })
-            .then((res) => res.json())
-            .catch((e) => {
-              console.error(e)
-            })
 
-          if (userTweets) setTwitterSuccess(true)
+        if (userTweets) setTwitterSuccess(true)
 
-          setKeywordFetching(false)
-          setTimeout(function () {
-            inputRef?.current?.focus()
-          }, 300)
-          // Tweet text
-          if (userTweets?._realData?.data[0]?.text) {
-            setInput(userTweets._realData.data[0].text)
-          } else {
-            setInput('')
-          }
-          // Tweet media (just images atm)
-          const mediaKey =
-            userTweets?._realData?.data[num]?.attachments?.media_keys[0] // todo get all keys not just the 0th
-          userTweets?._realData?.includes?.media?.forEach(
-            (item: any, index: number) => {
-              console.log(item.media_key)
-              if (item.media_key === mediaKey) {
-                setMedia(item.url)
-              }
-            }
-          )
-          return
+        setKeywordFetching(false)
+        setTimeout(function () {
+          inputRef?.current?.focus()
+        }, 300)
+        // Tweet text
+        if (userTweets?._realData?.data[num]?.text) {
+          setInput(userTweets._realData.data[num].text)
+        } else {
+          setInput('')
         }
+        // Tweet media (just images atm)
+        const mediaKey =
+          userTweets?._realData?.data[num]?.attachments?.media_keys[0] // todo get all keys not just the 0th
+        userTweets?._realData?.includes?.media?.forEach(
+          (item: any, index: number) => {
+            console.log(item.media_key)
+            if (item.media_key === mediaKey) {
+              setMedia(item.url)
+            }
+          }
+        )
+        return
       }
     }
 
