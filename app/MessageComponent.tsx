@@ -67,7 +67,7 @@ function MessageComponent({ message }: Props) {
             )}
           </div>
           <div className={`${isUser ? 'ml-2' : 'mr-2'}`}>
-            <Heart owner={isUser ? 'mine' : 'theirs'} />
+            <Heart owner={isUser ? 'mine' : 'theirs'} liked={true} />
           </div>
         </div>
         <p
