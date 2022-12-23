@@ -241,6 +241,7 @@ function ChatInput() {
             session?.service?.slice(1)
           : 'Anonymous',
       media: media,
+      liked: false,
     }
 
     const uploadMessageToUpstash = async () => {

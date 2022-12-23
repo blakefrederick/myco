@@ -7,4 +7,5 @@ export type Message = {
   email: string
   service: string
   media: string
+  liked: boolean
 }

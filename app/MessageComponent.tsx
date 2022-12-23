@@ -2,6 +2,7 @@ import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { Message } from 'typings'
 import DeleteButton from './DeleteButton'
+import LikeHeart from './LikeHeart'
 import Heart from './Heart'
 
 type Props = {
@@ -67,7 +68,7 @@ function MessageComponent({ message }: Props) {
             )}
           </div>
           <div className={`${isUser ? 'ml-2' : 'mr-2'}`}>
-            <Heart owner={isUser ? 'mine' : 'theirs'} liked={true} />
+            <Heart owner={isUser ? 'mine' : 'theirs'} liked={message.liked} />
           </div>
         </div>
         <p
@@ -94,6 +95,7 @@ function MessageComponent({ message }: Props) {
           } ${isInstagram && 'text-Instagram'}`}
         >
           {isUser && <DeleteButton session={session} message={message} />}
+          {isUser && <LikeHeart session={session} message={message} />}
         </p>
       </div>
     </div>
