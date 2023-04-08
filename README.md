@@ -35,18 +35,9 @@ Fetch Twitter data from chat:
 
 Fetch Instagram data too.
 
-<p>Likely:</p>
-<ul>
-<li>Content attribution</li>
-</ul>
-<p>Possible:</p>
-<ul>
-<li>Micropayments</li>
-</ul>
-<p>Unlikely:</p>
-<li>Figure out what web5 is</li>
-<li>End-to-end encryption</li>
-</ul>
-<br/>
+Apr 2023 - Twitter login API still working:
+
+<img width="321" alt="twitter-api" src="https://user-images.githubusercontent.com/4672139/230734264-b3ec734f-ed64-4aa0-93e1-91aa0c19ac41.png">
+
 <p>Tech + services used: Next.js 13 + Tailwind CSS + Upstash + Redis + Pusher + SWR + NextAuth + Facebook, Github, Twitter Authentication</p>
 <p>Props: Sonny Sangha https://www.youtube.com/watch?v=T2jKJF4BZOY for the prompt and getting me started, Max Proske for helpful advice</p>
