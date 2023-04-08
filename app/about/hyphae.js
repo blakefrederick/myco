@@ -24,10 +24,10 @@ export function littleBang(canvas) {
       this.length = 0
       this.visited = []
 
-      // Generate a random color for the hypha
-      let h = Math.random() * 360
-      let s = Math.random() * 100
-      let l = Math.random() * 100
+      // Generate a random color for the hypha (shades of brown and black only)
+      let h = Math.floor(Math.random() * 21) + 10
+      let s = Math.floor(Math.random() * 21) + 40
+      let l = Math.floor(Math.random() * 21)
       this.color = `hsl(${h}, ${s}%, ${l}%)`
     }
     //
@@ -35,7 +35,7 @@ export function littleBang(canvas) {
     update() {
       // Gradually grow the hypha network
       if (this.growing) {
-        this.length += 0.000001
+        this.length += 0.000003
         let sign = Math.ceil((Math.random() - 0.5) * 2) < 1 ? -1 : 1
 
         // Use a random walk algorithm to explore the canvas
